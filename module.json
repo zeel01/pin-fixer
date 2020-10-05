@@ -1,7 +1,7 @@
 {
 	"name": "pin-fixer",
 	"title": "Pin Fixer",
-	"description": "Make map pins scale less draumatically with zoom level.",
+	"description": "Make map pins scale less dramatically with zoom level.",
 	"author": "zeel",
 	"version": "0.0.2",
 	"minimumCoreVersion": "0.6.6",
