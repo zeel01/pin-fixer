@@ -1,26 +1,64 @@
+class PinFixer {
+	static get minScale() { return 0.1; }
+	static get maxScale() { return CONFIG.Canvas.maxZoom; }
 
+	static get flags() { return canvas.scene.data.flags; }
 
-Hooks.on("canvasPan", (canvas, pan) => {
-	const flags = canvas.scene.data.flags;
-	if (!flags.pinfix.enable) return;
+	static get enabled() { return !!this.flags.enable; }
+	static get zoomFloor() { return this.flags.pinfix.zoomFloor ?? this.minScale; }
+	static get zoomCeil() { return this.flags.pinfix.zoomFloor ?? this.maxScale; }
+	static get minScale() { return this.flags.pinfix.minScale ?? 1; }
+	static get maxScale() { return this.flags.pinfix.maxScale ?? 1; }
 
-	function mapRange(from, to, s) {
+	static reciprocal(number) { return 1 / number; }
+
+	static map(from, to, s) {
 		return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
-	};
+	}
 
-	const reciprocal = 1 / pan.scale;
-	const clamped = Math.clamped(pan.scale, flags.pinfix.zoomFloor, flags.pinfix.zoomCeil);
-	const mapped = mapRange([flags.pinfix.zoomFloor, flags.pinfix.zoomCeil], [flags.pinfix.minScale, flags.pinfix.maxScale], clamped);
-	
-	const scale = reciprocal * mapped;// mapRange([.33, 10], [.75, 2], reciprocal);
+	static clampZoom(zoom) {
+		return Math.clamped(zoom, this.zoomFloor, this.zoomCeil);
+	}
+	static remapZoom(zoom) {
+		return this.map([this.zoomFloor, this.zoomCeil], [this.minScale, this.maxScale], zoom);
+	}
+	static noteScaleFactor(scale) {
+		return this.remapZoom(this.clampZoom(scale));
+	}
 
-	canvas.notes.objects.children.forEach(note => {
+	static noteScaleConfigured(scale) {
+		return this.reciprocal(scale) * this.noteScaleFactor(scale);
+	}
+	static noteScaleBasic(scale) {
+		return this.reciprocal(scale);
+	}
+
+	static scaleNotes(scale) {
+		canvas.notes.objects.children.forEach(note => 
+			this.scaleNote(note, this.noteScaleConfigured(scale))
+		);
+	}
+
+	static scaleNote(note, scale) {
 		note.transform.scale.x = scale;
 		note.transform.scale.y = scale;
-	});
-	document.getElementById("pin-cushion-hud").style.transform = `scale(${scale})`;
-//	document.getElementById("poi-tp-ctx-menu").style.transform = `scale(${scale})`;
-})
+	}
+	static scalePinCushion(scale) {
+		const hud = document.getElementById("pin-cushion-hud");
+		if (hud) hud.style.transform = `scale(${scale})`;
+	}
+	static scalePoiTp(scale) {
+		const hud = document.getElementById("poi-tp-ctx-menu");
+		if (hud) hud.style.transform = `scale(${scale})`;
+	}
+
+	static canvasPan(canvas, pan) {
+		this.scaleNotes(pan.scale);
+	}
+}
+
+Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
+
 
 Hooks.on("renderSceneConfig", (sceneConfig, html, data) => {
 	const flags = data.entity.flags;
