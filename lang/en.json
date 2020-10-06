@@ -2,5 +2,13 @@
 	"pinfix.title": "Pin Fixer",
 	"pinfix.description": "Make map pins scale less dramatically with zoom level.",
 	"pinfix.enable.name": "Enable",
-	"pinfix.enable.desc": "Enable or disable this feature."
+	"pinfix.enable.desc": "Enable or disable this feature.",
+	"pinfix.minScale.name": "Min Scale",
+	"pinfix.minScale.desc": "The smallest scale for map pins (zoomed all the way out).",
+	"pinfix.maxScale.name": "Max Scale",
+	"pinfix.maxScale.desc": "The larges scale for map pins (zoomed all the way in).",
+	"pinfix.zoomFloor.name": "Zoom Floor",
+	"pinfix.zoomFloor.desc": "The pin scale won't change when zoomed out further than this.",
+	"pinfix.zoomCeil.name": "Zoom Ceiling",
+	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this.",
 }

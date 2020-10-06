@@ -20,14 +20,35 @@ Hooks.on("canvasPan", (canvas, pan) => {
 })
 
 Hooks.on("renderSceneConfig", (sceneConfig, html, data) => {
+	const flags = data.entity.flags;
 	const template = `
 		<hr>
 		<h3 class="form-header"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pinfix.title")}</h3>
 		<p class="notes">${game.i18n.localize("pinfix.description")}</p>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.enable.name")}</label>
-			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean" ${data.entity.flags.pinfix?.enable ? "checked":""}>
+			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean" ${flags.pinfix?.enable ? "checked":""}>
 			<p class="notes">${game.i18n.localize("pinfix.enable.desc")}</p>
+		</div>
+		<div class="form-group">
+			<label>${game.i18n.localize("pinfix.minScale.name")}</label>
+			<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="${flags.pinfix?.minScale ?? 1}">
+			<p class="notes">${game.i18n.localize("pinfix.minScale.desc")}</p>
+		</div>
+		<div class="form-group">
+			<label>${game.i18n.localize("pinfix.maxScale.name")}</label>
+			<input type="text" name="flags.pinfix.maxScale" data-dtype="Number" value="${flags.pinfix?.maxScale ?? 1}">
+			<p class="notes">${game.i18n.localize("pinfix.maxScale.desc")}</p>
+		</div>
+		<div class="form-group">
+			<label>${game.i18n.localize("pinfix.zoomFloor.name")}</label>
+			<input type="text" name="flags.pinfix.zoomFloor" data-dtype="Number" value="${flags.pinfix?.zoomFloor ?? .1}">
+			<p class="notes">${game.i18n.localize("pinfix.zoomFloor.desc")}</p>
+		</div>
+		<div class="form-group">
+			<label>${game.i18n.localize("pinfix.zoomCeil.name")}</label>
+			<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="${flags.pinfix?.zoomCeil ?? 3}">
+			<p class="notes">${game.i18n.localize("pinfix.zoomCeil.desc")}</p>
 		</div>`;
-	html.find(".scroll").append(template);
+	html.find(".form-group").last().after(template);
 });
