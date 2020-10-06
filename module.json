@@ -3,7 +3,7 @@
 	"title": "Pin Fixer",
 	"description": "Make map pins scale less dramatically with zoom level.",
 	"author": "zeel",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"minimumCoreVersion": "0.6.6",
 	"compatibleCoreVersion": "0.6.6",
 	"scripts": [
@@ -18,5 +18,5 @@
 	],
 	"manifest": "https://raw.githubusercontent.com/zeel01/pin-fixer/master/module.json",
 	"url": "https://github.com/zeel01/pin-fixer",
-	"download": "https://github.com/zeel01/pin-fixer/releases/download/v0.1.0/pin-fixer.zip"
+	"download": "https://github.com/zeel01/pin-fixer/releases/download/v0.1.1/pin-fixer.zip"
 }

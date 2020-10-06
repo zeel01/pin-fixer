@@ -87,7 +87,7 @@ class PinFixer {
 		<p class="notes">${game.i18n.localize("pinfix.description")}</p>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.enable.name")}</label>
-			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"${this.enable ? " checked" : ""}>
+			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"${this.enabled ? " checked" : ""}>
 			<p class="notes">${game.i18n.localize("pinfix.enable.desc")}</p>
 		</div>
 		<div class="form-group">
