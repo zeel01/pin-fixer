@@ -12,6 +12,14 @@ class PinFixer {
 	static get zoomCeil()     { return  Number(this.flags.pinfix?.zoomCeil  ?? this.maxCanvScale); }
 	static get minScale()     { return  Number(this.flags.pinfix?.minScale  ?? 1); }
 	static get maxScale()     { return  Number(this.flags.pinfix?.maxScale  ?? 1); }
+	static get hudScale()     { return  Number(this.flags.pinfix?.hudScale  ?? 1); }
+
+	static get huds() {
+		return [
+			{ hook: "renderPinCushionHUD", id: "pin-cushion-hud" },
+			{ hook: "renderPoiTpHUD", id: "poi-tp-ctx-menu" }
+		]
+	}
 
 	static reciprocal(number) { return 1 / number; }
 
@@ -29,53 +37,65 @@ class PinFixer {
 		return this.remapZoom(this.clampZoom(scale));
 	}
 
+	static hudScaleFactor(scale) {
+		return this.noteScaleBasic(scale) * this.hudScale;
+	}
+
 	static noteScaleConfigured(scale) {
 		return this.reciprocal(scale) * this.noteScaleFactor(scale);
 	}
 	static noteScaleBasic(scale) {
 		return this.reciprocal(scale);
 	}
-
+	
+	static scaleNote(note, scale) {
+		note.transform.scale.x = scale;
+		note.transform.scale.y = scale;
+	}
 	static scaleNotes(scale) {
 		const scaled = this.noteScaleConfigured(scale);
 		canvas.notes.objects.children.forEach(note => 
 			this.scaleNote(note, scaled)
 		);
 	}
+	
+	static scaleHUD(hudId, scale) {
+		const hud = document.getElementById(hudId);
+		if (hud) hud.style.transform = `scale(${scale})`;
+	}
+	static scaleHUDs(scale) {
+		const hudScale = this.hudScaleFactor(scale);
+		this.huds.forEach(hud => this.scaleHUD(hud.id, hudScale));
+	}
+	
+	static resetHudScale(hudId) {
+		const hud = document.getElementById(hudId);
+		if (hud) hud.style.transform = "";
+	}
+	static resetHUDs() {
+		this.huds.forEach(hud => this.resetHudScale(hud.id));
+	}
+	
+	static reset() {
+		this.scaleNotes(1);
+		this.resetHUDs();
+	}
 
-	static scaleNote(note, scale) {
-		note.transform.scale.x = scale;
-		note.transform.scale.y = scale;
-	}
-	static scalePinCushion(scale) {
-		const hud = document.getElementById("pin-cushion-hud");
-		if (hud) hud.style.transform = `scale(${scale})`;
-	}
-	static scalePoiTp(scale) {
-		const hud = document.getElementById("poi-tp-ctx-menu");
-		if (hud) hud.style.transform = `scale(${scale})`;
-	}
 
 	static canvasPan(canvas, pan) {
+		if (!this.enabled) return;
 		this.scaleNotes(pan.scale);
-
-		const basicScale = this.noteScaleBasic(pan.scale);
-		this.scalePinCushion(basicScale);
-		this.scalePoiTp(basicScale);
+		this.scaleHUDs(pan.scale);
 	}
-	static renderPinCushionHUD(hud, html, data) {
-		const basicScale = this.noteScaleBasic(canvas.stage.scale.x);
-		this.scalePinCushion(basicScale);
+	static renderHUD(id, hud, html, data) {
+		if (!this.enabled) return;
+		const hudScale = this.hudScaleFactor(canvas.stage.scale.x);
+		this.scaleHUD(id, hudScale);
 	}
-	static renderPoiTpHUD(hud, html, data) {
-		const basicScale = this.noteScaleBasic(canvas.stage.scale.x);
-		this.scalePoiTp(basicScale);
-	}
-
 	static updateScene(scene, data, options) {
-		this.canvasPan(canvas, { scale: canvas.stage.scale.x });
+		if (!this.enabled) this.reset();
+		else this.canvasPan(canvas, { scale: canvas.stage.scale.x });
 	}
-
 	static renderSceneConfig(sceneConfig, html, data) {
 		html.find(".form-group").last().after(this.template);
 	}
@@ -109,12 +129,22 @@ class PinFixer {
 			<label>${game.i18n.localize("pinfix.zoomCeil.name")}</label>
 			<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="${this.zoomCeil}">
 			<p class="notes">${game.i18n.localize("pinfix.zoomCeil.desc")}</p>
+		</div>
+		<div class="form-group">
+			<label>${game.i18n.localize("pinfix.hudScale.name")}</label>
+			<input type="text" name="flags.pinfix.hudScale" data-dtype="Number" value="${this.hudScale}">
+			<p class="notes">${game.i18n.localize("pinfix.hudScale.desc")}</p>
 		</div>`;
+	}
+
+	static createHudHooks() {
+		this.huds.forEach(hud => {
+			Hooks.on(hud.hook, (...args) => this.renderHUD(hud.id, ...args));
+		});
 	}
 }
 
 Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
-Hooks.on("renderPinCushionHUD", (...args) => PinFixer.renderPinCushionHUD(...args));
-Hooks.on("renderPoiTpHUD", (...args) => PinFixer.renderPoiTpHUD(...args));
 Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
+PinFixer.createHudHooks();

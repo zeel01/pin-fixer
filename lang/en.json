@@ -10,5 +10,7 @@
 	"pinfix.zoomFloor.name": "Zoom Floor",
 	"pinfix.zoomFloor.desc": "The pin scale won't change when zoomed out further than this.",
 	"pinfix.zoomCeil.name": "Zoom Ceiling",
-	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this."
+	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this.",
+	"pinfix.hudScale.name": "Pin HUD Scale",
+	"pinfix.hudScale.desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
 }
