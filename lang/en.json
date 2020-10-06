@@ -6,9 +6,9 @@
 	"pinfix.minScale.name": "Min Scale",
 	"pinfix.minScale.desc": "The smallest scale for map pins (zoomed all the way out).",
 	"pinfix.maxScale.name": "Max Scale",
-	"pinfix.maxScale.desc": "The larges scale for map pins (zoomed all the way in).",
+	"pinfix.maxScale.desc": "The largest scale for map pins (zoomed all the way in).",
 	"pinfix.zoomFloor.name": "Zoom Floor",
 	"pinfix.zoomFloor.desc": "The pin scale won't change when zoomed out further than this.",
 	"pinfix.zoomCeil.name": "Zoom Ceiling",
-	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this.",
+	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this."
 }
