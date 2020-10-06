@@ -1,13 +1,16 @@
 
 
 Hooks.on("canvasPan", (canvas, pan) => {
+	const flags = canvas.scene.data.flags;
+	if (!flags.pinfix.enable) return;
+
 	function mapRange(from, to, s) {
 		return to[0] + (s - from[0]) * (to[1] - to[0]) / (from[1] - from[0]);
 	};
 
 	const reciprocal = 1 / pan.scale;
-	const clamped = Math.clamped(pan.scale, .5, 3);
-	const mapped = mapRange([.5, 3], [.75, 2], clamped);
+	const clamped = Math.clamped(pan.scale, flags.pinfix.zoomFloor, flags.pinfix.zoomCeil);
+	const mapped = mapRange([flags.pinfix.zoomFloor, flags.pinfix.zoomCeil], [flags.pinfix.minScale, flags.pinfix.maxScale], clamped);
 	
 	const scale = reciprocal * mapped;// mapRange([.33, 10], [.75, 2], reciprocal);
 
