@@ -134,8 +134,8 @@ class PinFixer {
 	 * reciprocal of the canvas scale.
 	 *
 	 * @static
-	 * @param {*} scale - The canvas scale
-	 * @return {*} The scale for the note
+	 * @param {number} scale - The canvas scale
+	 * @return {number} The scale for the note
 	 * @memberof PinFixer
 	 */
 	static noteScaleBasic(scale) {
