@@ -141,6 +141,12 @@ class PinFixer {
 	static noteScaleBasic(scale) {
 		return this.reciprocal(scale);
 	}
+
+	static shouldHide(note, scale) {
+		const flags = note.data.flags?.pinfix;
+		if (!flags) return false;
+		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
+	}
 	
 	/**
 	 * Set the scale of a note on the canvas.
@@ -166,6 +172,31 @@ class PinFixer {
 		canvas.notes.objects.children.forEach(note => 
 			this.scaleNote(note, scaled)
 		);
+	}
+	/**
+	 * Hides notes that need hidden
+	 *
+	 * @static
+	 * @param {number} scale - The current map scale
+	 * @param {boolean} unhide - If true, unhide regardless of scale
+	 * @memberof PinFixer
+	 */
+	static hideNotes(scale, unhide) {
+		canvas.notes.objects.children.forEach(note =>
+			this.hideNote(note, scale, unhide)
+		);
+	}
+	/**
+	 * Hides a note that needs hidden
+	 *
+	 * @static
+	 * @param {Note} note - The note that may need hidden
+	 * @param {number} scale - The current map scale
+	 * @param {boolean} unhide - If true, unhide regardless of scale
+	 * @memberof PinFixer
+	 */
+	static hideNote(note, scale, unhide) {
+		note.visible = unhide || !this.shouldHide(note, scale);
 	}
 	
 	/**
@@ -216,13 +247,14 @@ class PinFixer {
 	
 	/**
 	 * Reset all pins to normal size,
-	 * and reset all HUDs
+	 * and reset all HUDs, and unhide hidden notes
 	 *
 	 * @static
 	 * @memberof PinFixer
 	 */
 	static reset() {
 		this.scaleNotes(1);
+		this.hideNotes(1, true);
 		this.resetHUDs();
 	}
 
@@ -257,6 +289,7 @@ class PinFixer {
 	static canvasPan(canvas, pan) {
 		if (!this.enabled) return;
 		this.scaleNotes(pan.scale);
+		this.hideNotes(pan.scale);
 		this.scaleHUDs(pan.scale);
 	}
 	/**
@@ -319,6 +352,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static async renderNoteConfig(noteConfig, html, data) {
+		//if (!this.enabled) return;
 		html.find(".form-group").last().after(await this.getNoteHtml(this.getNoteTemplateData(data)));
 	}
 
@@ -371,7 +405,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static getNoteTemplateData(data) {
-		return data.entity?.flags?.pinfix || {
+		return data.object?.flags?.pinfix || {
 			minZoomLevel: this.minCanvScale,
 			maxZoomLevel: this.maxCanvScale
 		}
