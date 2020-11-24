@@ -308,17 +308,43 @@ class PinFixer {
 	}
 
 	/**
+	 * Handles the renderNoteConfig Hook
+	 *
+	 * Injects HTML into the note config.
+	 *
+	 * @static
+	 * @param {NoteConfig} noteConfig - The Note config sheet
+	 * @param {jQuery} html - The HMTL of the sheet
+	 * @param {object} data - Data associated with the sheet rendering
+	 * @memberof PinFixer
+	 */
+	static async renderNoteConfig(noteConfig, html, data) {
+		html.find(".form-group").last().after(await this.getNoteHtml(this.getNoteTemplateData(data)));
+	}
+
+	/**
 	 * An object containing settings for the Pin Fixer module for a given scene
 	 *
 	 * @typedef PinFixSettings
 	 * @property {boolean} enable - Whether or not the module is enabled for the given scene
-	 * @property {float} zoomFloor - The lower limit of scaling 
-	 * @property {float} zoomCeil - The upper limit of scaling
-	 * @property {float} minScale - The smallest allowed pin scale
-	 * @property {float} maxScale - The largest allowed pin scale
-	 * @property {float} hudScale - The scale factor for the HUD
+	 * @property {number} zoomFloor - The lower limit of scaling 
+	 * @property {number} zoomCeil - The upper limit of scaling
+	 * @property {number} minScale - The smallest allowed pin scale
+	 * @property {number} maxScale - The largest allowed pin scale
+	 * @property {number} hudScale - The scale factor for the HUD
 	 * 
-	*//**
+	*/
+
+	/**
+	 * An object containing settigns for individual notes
+	 *
+	 * @typedef NoteSettings
+	 * @property {number} minZoomLevel - The note is hidden when zoom scale is under this number
+	 * @property {number} maxZoomLevel - The note is hidden when zoom scale is over this number
+	 * 
+	 */
+	
+	/**
 	 * Retrieves the current data for the scene being configured.
 	 *
 	 * @static
@@ -336,6 +362,20 @@ class PinFixer {
 			hudScale: 1
 		}
 	}
+	/**
+	 * Retrieves the current data for the note being configured.
+	 *
+	 * @static
+	 * @param {object} data - The data being passed to the note config template
+	 * @return {NoteSettings}
+	 * @memberof PinFixer
+	 */
+	static getNoteTemplateData(data) {
+		return data.entity?.flags?.pinfix || {
+			minZoomLevel: this.minCanvScale,
+			maxZoomLevel: this.maxCanvScale
+		}
+	}
 
 	/**
 	 * The HTML to be added to the scene configuration
@@ -348,6 +388,19 @@ class PinFixer {
 	 */
 	static async getSceneHtml(settings) {
 		return await renderTemplate("modules/pin-fixer/sceneSettings.html", settings);
+	}
+
+	/**
+	 * The HTML to be added to the note configuration
+	 * in order to configure Pin Fixer for the note.
+	 *
+	 * @param {NoteSettings} settings - The Note settings of the note being configured.
+	 * @static
+	 * @return {string} The HTML to be injected
+	 * @memberof PinFixer
+	 */
+	static async getNoteHtml(settings) {
+		return await renderTemplate("modules/pin-fixer/noteSettings.html", settings);
 	}
 
 	/**
@@ -371,6 +424,7 @@ class PinFixer {
 Hooks.once("init", (...args) => PinFixer.init(...args));
 Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
 Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
+Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
 PinFixer.createHudHooks();
