@@ -227,6 +227,22 @@ class PinFixer {
 	}
 
 	/**
+	 * Handles the main init Hook
+	 *
+	 * Loads the template files
+	 *
+	 * @static
+	 * @param {object} args - Not really doing anything with the args, if there even are any
+	 * @memberof PinFixer
+	 */
+	static init(...args) {
+		loadTemplates([
+			"modules/pin-fixer/sceneSettings.html"
+			//"modules/pinfixer/.html"
+		]);
+	}
+
+	/**
 	 * Handle the canvasPan Hook
 	 *
 	 * @static
@@ -287,9 +303,10 @@ class PinFixer {
 	 * @param {object} data - Data associated with the sheet rendering
 	 * @memberof PinFixer
 	 */
-	static renderSceneConfig(sceneConfig, html, data) {
-		html.find(".form-group").last().after(this.getSceneHtml(this.getSceneTemplateData(data)));
+	static async renderSceneConfig(sceneConfig, html, data) {
+		html.find(".form-group").last().after(await this.getSceneHtml(this.getSceneTemplateData(data)));
 	}
+
 	/**
 	 * An object containing settings for the Pin Fixer module for a given scene
 	 *
@@ -329,41 +346,8 @@ class PinFixer {
 	 * @return {string} The HTML to be injected
 	 * @memberof PinFixer
 	 */
-	static getSceneHtml(settings) {
-		return `
-		<hr>
-		<h3 class="form-header"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pinfix.title")}</h3>
-		<p class="notes">${game.i18n.localize("pinfix.description")}</p>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.enable.name")}</label>
-			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"${settings.enable ? " checked" : ""}>
-			<p class="notes">${game.i18n.localize("pinfix.enable.desc")}</p>
-		</div>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.minScale.name")}</label>
-			<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="${settings.minScale}">
-			<p class="notes">${game.i18n.localize("pinfix.minScale.desc")}</p>
-		</div>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.maxScale.name")}</label>
-			<input type="text" name="flags.pinfix.maxScale" data-dtype="Number" value="${settings.maxScale}">
-			<p class="notes">${game.i18n.localize("pinfix.maxScale.desc")}</p>
-		</div>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.zoomFloor.name")}</label>
-			<input type="text" name="flags.pinfix.zoomFloor" data-dtype="Number" value="${settings.zoomFloor}">
-			<p class="notes">${game.i18n.localize("pinfix.zoomFloor.desc")}</p>
-		</div>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.zoomCeil.name")}</label>
-			<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="${settings.zoomCeil}">
-			<p class="notes">${game.i18n.localize("pinfix.zoomCeil.desc")}</p>
-		</div>
-		<div class="form-group">
-			<label>${game.i18n.localize("pinfix.hudScale.name")}</label>
-			<input type="text" name="flags.pinfix.hudScale" data-dtype="Number" value="${settings.hudScale}">
-			<p class="notes">${game.i18n.localize("pinfix.hudScale.desc")}</p>
-		</div>`;
+	static async getSceneHtml(settings) {
+		return await renderTemplate("modules/pin-fixer/sceneSettings.html", settings);
 	}
 
 	/**
@@ -384,7 +368,9 @@ class PinFixer {
  * of PinFixer with all arguments.
  */
 
+Hooks.once("init", (...args) => PinFixer.init(...args));
 Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
 Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
+
 PinFixer.createHudHooks();

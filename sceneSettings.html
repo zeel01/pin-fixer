@@ -1,0 +1,33 @@
+<hr>
+<h3 class="form-header"><i class="fas fa-bookmark"></i> {{ localize "pinfix.title" }}</h3>
+<p class="notes">{{ localize "pinfix.description" }}</p>
+<div class="form-group">
+	<label>{{ localize "pinfix.enable.name" }}</label>
+	<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"{{#if enable}} checked{{/if}}>
+	<p class="notes">{{ localize "pinfix.enable.desc" }}</p>
+</div>
+<div class="form-group">
+	<label>{{ localize "pinfix.minScale.name" }}</label>
+	<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="{{minScale}}">
+	<p class="notes">{{ localize "pinfix.minScale.desc" }}</p>
+</div>
+<div class="form-group">
+	<label>{{ localize "pinfix.maxScale.name" }}</label>
+	<input type="text" name="flags.pinfix.maxScale" data-dtype="Number" value="{{maxScale}}">
+	<p class="notes">{{ localize "pinfix.maxScale.desc" }}</p>
+</div>
+<div class="form-group">
+	<label>{{ localize "pinfix.zoomFloor.name" }}</label>
+	<input type="text" name="flags.pinfix.zoomFloor" data-dtype="Number" value="{{zoomFloor}}">
+	<p class="notes">{{ localize "pinfix.zoomFloor.desc" }}</p>
+</div>
+<div class="form-group">
+	<label>{{ localize "pinfix.zoomCeil.name" }}</label>
+	<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="{{zoomCeil}}">
+	<p class="notes">{{ localize "pinfix.zoomCeil.desc" }}</p>
+</div>
+<div class="form-group">
+	<label>{{ localize "pinfix.hudScale.name" }}</label>
+	<input type="text" name="flags.pinfix.hudScale" data-dtype="Number" value="{{hudScale}}">
+	<p class="notes">{{ localize "pinfix.hudScale.desc" }}</p>
+</div>
