@@ -288,50 +288,80 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static renderSceneConfig(sceneConfig, html, data) {
-		html.find(".form-group").last().after(this.template);
+		html.find(".form-group").last().after(this.getSceneHtml(this.getSceneTemplateData(data)));
+	}
+	/**
+	 * An object containing settings for the Pin Fixer module for a given scene
+	 *
+	 * @typedef PinFixSettings
+	 * @property {boolean} enable - Whether or not the module is enabled for the given scene
+	 * @property {float} zoomFloor - The lower limit of scaling 
+	 * @property {float} zoomCeil - The upper limit of scaling
+	 * @property {float} minScale - The smallest allowed pin scale
+	 * @property {float} maxScale - The largest allowed pin scale
+	 * @property {float} hudScale - The scale factor for the HUD
+	 * 
+	*//**
+	 * Retrieves the current data for the scene being configured.
+	 *
+	 * @static
+	 * @param {object} data - The data being passed to the scene config template
+	 * @return {PinFixSettings}
+	 * @memberof PinFixer
+	 */
+	static getSceneTemplateData(data) {
+		return data.entity?.flags?.pinfix || {
+			enable: false,
+			zoomFloor: this.minCanvScale,
+			zoomCeil: this.maxCanvScale,
+			minScale: 1,
+			maxScale: 1,
+			hudScale: 1
+		}
 	}
 
 	/**
 	 * The HTML to be added to the scene configuration
 	 * in order to configure Pin Fixer for the scene.
 	 *
-	 * @readonly
+	 * @param {PinFixSettings} settings - The Pin Fixer settings of the scene being configured.
 	 * @static
+	 * @return {string} The HTML to be injected
 	 * @memberof PinFixer
 	 */
-	static get template() {
+	static getSceneHtml(settings) {
 		return `
 		<hr>
 		<h3 class="form-header"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pinfix.title")}</h3>
 		<p class="notes">${game.i18n.localize("pinfix.description")}</p>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.enable.name")}</label>
-			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"${this.enabled ? " checked" : ""}>
+			<input type="checkbox" name="flags.pinfix.enable" data-dtype="Boolean"${settings.enable ? " checked" : ""}>
 			<p class="notes">${game.i18n.localize("pinfix.enable.desc")}</p>
 		</div>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.minScale.name")}</label>
-			<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="${this.minScale}">
+			<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="${settings.minScale}">
 			<p class="notes">${game.i18n.localize("pinfix.minScale.desc")}</p>
 		</div>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.maxScale.name")}</label>
-			<input type="text" name="flags.pinfix.maxScale" data-dtype="Number" value="${this.maxScale}">
+			<input type="text" name="flags.pinfix.maxScale" data-dtype="Number" value="${settings.maxScale}">
 			<p class="notes">${game.i18n.localize("pinfix.maxScale.desc")}</p>
 		</div>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.zoomFloor.name")}</label>
-			<input type="text" name="flags.pinfix.zoomFloor" data-dtype="Number" value="${this.zoomFloor}">
+			<input type="text" name="flags.pinfix.zoomFloor" data-dtype="Number" value="${settings.zoomFloor}">
 			<p class="notes">${game.i18n.localize("pinfix.zoomFloor.desc")}</p>
 		</div>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.zoomCeil.name")}</label>
-			<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="${this.zoomCeil}">
+			<input type="text" name="flags.pinfix.zoomCeil" data-dtype="Number" value="${settings.zoomCeil}">
 			<p class="notes">${game.i18n.localize("pinfix.zoomCeil.desc")}</p>
 		</div>
 		<div class="form-group">
 			<label>${game.i18n.localize("pinfix.hudScale.name")}</label>
-			<input type="text" name="flags.pinfix.hudScale" data-dtype="Number" value="${this.hudScale}">
+			<input type="text" name="flags.pinfix.hudScale" data-dtype="Number" value="${settings.hudScale}">
 			<p class="notes">${game.i18n.localize("pinfix.hudScale.desc")}</p>
 		</div>`;
 	}
