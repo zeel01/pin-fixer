@@ -142,6 +142,16 @@ class PinFixer {
 		return this.reciprocal(scale);
 	}
 
+	/**
+	 * Returns true if the the zoom level is 
+	 * outside the range specified for the note.
+	 *
+	 * @static
+	 * @param {Note} note - The note that might be hidden
+	 * @param {number} scale - The current scale of the scene
+	 * @return {boolean} 
+	 * @memberof PinFixer
+	 */
 	static shouldHide(note, scale) {
 		const flags = note.data.flags?.pinfix;
 		if (!flags) return false;
