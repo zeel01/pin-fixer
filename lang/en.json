@@ -1,16 +1,30 @@
 {
-	"pinfix.title": "Pin Fixer",
-	"pinfix.description": "Make map pins scale less dramatically with zoom level.",
-	"pinfix.enable.name": "Enable",
-	"pinfix.enable.desc": "Enable or disable this feature.",
-	"pinfix.minScale.name": "Min Scale",
-	"pinfix.minScale.desc": "The smallest scale for map pins (zoomed all the way out).",
-	"pinfix.maxScale.name": "Max Scale",
-	"pinfix.maxScale.desc": "The largest scale for map pins (zoomed all the way in).",
-	"pinfix.zoomFloor.name": "Zoom Floor",
-	"pinfix.zoomFloor.desc": "The pin scale won't change when zoomed out further than this.",
-	"pinfix.zoomCeil.name": "Zoom Ceiling",
-	"pinfix.zoomCeil.desc": "The pin scale won't change when zoomed in further than this.",
-	"pinfix.hudScale.name": "Pin HUD Scale",
-	"pinfix.hudScale.desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
+	"pinfix": {
+		"title": "Pin Fixer",
+		"description": "Make map pins scale less dramatically with zoom level.",
+		"enable": {
+			"name": "Enable",
+			"desc": "Enable or disable this feature."
+		},
+		"minScale": {
+			"name": "Min Scale",
+			"desc": "The smallest scale for map pins (zoomed all the way out)."
+		},
+		"maxScale": {
+			"name": "Max Scale",
+			"desc": "The largest scale for map pins (zoomed all the way in)."
+		},
+		"zoomFloor": {
+			"name": "Zoom Floor",
+			"desc": "The pin scale won't change when zoomed out further than this."
+		},
+		"zoomCeil": {
+			"name": "Zoom Ceiling",
+			"desc": "The pin scale won't change when zoomed in further than this."
+		},
+		"hudScale": {
+			"name": "Pin HUD Scale",
+			"hudScale.desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
+		}
+	}
 }
