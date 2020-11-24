@@ -6,6 +6,10 @@
 			"name": "Enable",
 			"desc": "Enable or disable this feature."
 		},
+		"pinLocker": {
+			"name": "Lock Pins On Other Layers",
+			"desc": "Prevent pins from being dragged when not on the notes layer."
+		},
 		"minScale": {
 			"name": "Min Scale",
 			"desc": "The smallest scale for map pins (zoomed all the way out)."

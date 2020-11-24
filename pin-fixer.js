@@ -18,6 +18,10 @@ class PinFixer {
 	static get minScale()     { return  Number(this.flags.pinfix?.minScale  ?? 1); }
 	static get maxScale()     { return  Number(this.flags.pinfix?.maxScale  ?? 1); }
 	static get hudScale()     { return  Number(this.flags.pinfix?.hudScale  ?? 1); }
+	static get pinLocker()    { return Boolean(this.flags.pinfix?.pinLocker); }
+
+	static get onNotesLayer() { return canvas.activeLayer.constructor.name == "NotesLayer"; }
+	static get lockPins()     { return this.enabled && this.pinLocker && !this.onNotesLayer; }
 
 	/**
 	 * This set of data is used to define any HUDs from
@@ -371,6 +375,7 @@ class PinFixer {
 	 *
 	 * @typedef PinFixSettings
 	 * @property {boolean} enable - Whether or not the module is enabled for the given scene
+	 * @property {boolean} pinLocker - Whether or not to lock pins when not on the note layer
 	 * @property {number} zoomFloor - The lower limit of scaling 
 	 * @property {number} zoomCeil - The upper limit of scaling
 	 * @property {number} minScale - The smallest allowed pin scale
@@ -399,6 +404,7 @@ class PinFixer {
 	static getSceneTemplateData(data) {
 		return data.entity?.flags?.pinfix || {
 			enable: false,
+			pinLocker: false,
 			zoomFloor: this.minCanvScale,
 			zoomCeil: this.maxCanvScale,
 			minScale: 1,
@@ -472,3 +478,8 @@ Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
 PinFixer.createHudHooks();
+
+Note.prototype._canDrag = (user, event) => {
+	if (PinFixer.lockPins) return false;
+	else return Note.prototype._canControl(user);
+}

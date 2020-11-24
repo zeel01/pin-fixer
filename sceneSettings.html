@@ -7,6 +7,11 @@
 	<p class="notes">{{ localize "pinfix.enable.desc" }}</p>
 </div>
 <div class="form-group">
+	<label>{{ localize "pinfix.pinLocker.name" }}</label>
+	<input type="checkbox" name="flags.pinfix.pinLocker" data-dtype="Boolean"{{#if pinLocker}} checked{{/if}}>
+	<p class="notes">{{ localize "pinfix.pinLocker.desc" }}</p>
+</div>
+<div class="form-group">
 	<label>{{ localize "pinfix.minScale.name" }}</label>
 	<input type="text" name="flags.pinfix.minScale" data-dtype="Number" value="{{minScale}}">
 	<p class="notes">{{ localize "pinfix.minScale.desc" }}</p>
