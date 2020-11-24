@@ -25,6 +25,17 @@
 		"hudScale": {
 			"name": "Pin HUD Scale",
 			"hudScale.desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
+		},
+		"notes": {
+			"description": "Hide pins below or above certain zoom levels. (default range is 0.1 - 3)",
+			"minZoomLevel": {
+				"name": "Minimum Zoom Level",
+				"desc": "Pin will be hidden when zoom is less than this level."
+			},
+			"maxZoomLevel": {
+				"name": "Maximum Zoom Level",
+				"desc": "Pin will be hidden when zoom is greater than this level."
+			}
 		}
 	}
 }
