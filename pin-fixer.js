@@ -339,6 +339,22 @@ class PinFixer {
 		if (!this.enabled) this.reset();
 		else this.canvasPan(canvas, { scale: canvas.stage.scale.x });
 	}
+
+	static attachEventListeners(html) {
+		const slideWrapper = html.find(".pin-fixer .range-slider-with-icons");
+
+		slideWrapper.find(".range-slider").change((event) => {
+			const slider = $(event.currentTarget);
+			const input = slider.siblings(".range-editor");
+			input.val(slider.val());
+		});
+		slideWrapper.find(".range-editor").change((event) => {
+			const input = $(event.currentTarget);
+			const slider = input.siblings(".range-slider");
+			slider.val(input.val());
+		});
+	}
+
 	/**
 	 * Handles the renderSceneConfig Hook
 	 *
@@ -352,6 +368,7 @@ class PinFixer {
 	 */
 	static async renderSceneConfig(sceneConfig, html, data) {
 		html.find(".form-group").last().after(await this.getSceneHtml(this.getSceneTemplateData(data)));
+		this.attachEventListeners(html);
 	}
 
 	/**
@@ -368,6 +385,7 @@ class PinFixer {
 	static async renderNoteConfig(noteConfig, html, data) {
 		//if (!this.enabled) return;
 		html.find(".form-group").last().after(await this.getNoteHtml(this.getNoteTemplateData(data)));
+		this.attachEventListeners(html);
 	}
 
 	/**
@@ -401,8 +419,8 @@ class PinFixer {
 	 * @return {PinFixSettings}
 	 * @memberof PinFixer
 	 */
-	static getSceneTemplateData(data) {
-		return data.entity?.flags?.pinfix || {
+	static getSceneTemplateData(hookData) {
+		const data = hookData.entity?.flags?.pinfix || {
 			enable: false,
 			pinLocker: false,
 			zoomFloor: this.minCanvScale,
@@ -411,6 +429,16 @@ class PinFixer {
 			maxScale: 1,
 			hudScale: 1
 		}
+		data.sliders = ["zoomFloor", "zoomCeil", "minScale", "maxScale", "hudScale"].map(name => {
+			return {
+				name,
+				value: data[name],
+				label: `pinfix.${name}.name`,
+				description: `pinfix.${name}.desc`
+			}
+		});
+
+		return data;
 	}
 	/**
 	 * Retrieves the current data for the note being configured.
