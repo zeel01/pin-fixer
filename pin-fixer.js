@@ -399,7 +399,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static async renderNoteConfig(noteConfig, html, data) {
-		//if (!this.enabled) return;
+		if (!this.enabled) return;
 		html.find(".form-group").last().after(await this.getNoteHtml(this.getNoteTemplateData(data)));
 		this.attachEventListeners(html);
 	}
