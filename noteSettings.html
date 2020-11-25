@@ -1,13 +1,25 @@
 <hr>
 <h3 class="form-header"><i class="fas fa-bookmark"></i> {{ localize "pinfix.title" }}</h3>
 <p class="notes">{{ localize "pinfix.notes.description" }}</p>
+
 <div class="form-group">
 	<label>{{ localize "pinfix.notes.minZoomLevel.name" }}</label>
-	<input type="text" name="flags.pinfix.minZoomLevel" data-dtype="Number" value="{{minZoomLevel}}">
+	<div class="range-slider-with-icons">
+		<i class="fas fa-search-minus"></i>
+		<input type="range" name="flags.pinfix.minZoomLevel" data-dtype="Number" value="{{minZoomLevel}}" max="3" min="0.1" step="0.1">
+		<span class="range-value">{{minZoomLevel}}</span>
+		<i class="fas fa-search-plus"></i>
+	</div>
 	<p class="notes">{{ localize "pinfix.notes.minZoomLevel.desc" }}</p>
 </div>
+
 <div class="form-group">
 	<label>{{ localize "pinfix.notes.maxZoomLevel.name" }}</label>
-	<input type="text" name="flags.pinfix.maxZoomLevel" data-dtype="Number" value="{{maxZoomLevel}}">
+	<div class="range-slider-with-icons">
+		<i class="fas fa-search-minus"></i>
+		<input type="range" name="flags.pinfix.maxZoomLevel" data-dtype="Number" value="{{maxZoomLevel}}" min="0.1" max="3" step="0.1">
+		<span class="range-value">{{maxZoomLevel}}</span>
+		<i class="fas fa-search-plus"></i>
+	</div>
 	<p class="notes">{{ localize "pinfix.notes.maxZoomLevel.desc" }}</p>
 </div>
