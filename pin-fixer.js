@@ -467,6 +467,31 @@ class PinFixer {
 }
 
 /**
+ * This scetion is a money-patch of Note#_canDrag()
+ * by making thie method return false dragging can be prevented.
+ */
+
+// Copy the original method
+PinFixer.noteCanDrag = Note.prototype._canDrag;
+
+/**
+ * This patched method returns false either when
+ * the user has insufficient permissions, or
+ * when the pin locking feature is enabled.
+ * This prevents pins from being moved in
+ * unwanted contexts.
+ *
+ * @param {User} user - The current user
+ * @param {Event} event - The precipitating event
+ * @return {boolean} Whether or not dragging the note is permitted for the user on this layer
+ * @memberof Note
+ */
+Note.prototype._canDrag = function(user, event) {
+	if (PinFixer.lockPins) return false;
+	else return PinFixer.noteCanDrag.bind(this)(user, event); // When lockPins isn't true, return the result of the original method
+}
+
+/**
  * This is the Hooks section, hooks are registered here to call methods
  * of PinFixer with all arguments.
  */
@@ -478,8 +503,3 @@ Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
 PinFixer.createHudHooks();
-
-Note.prototype._canDrag = (user, event) => {
-	if (PinFixer.lockPins) return false;
-	else return Note.prototype._canControl(user);
-}
