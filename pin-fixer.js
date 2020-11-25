@@ -20,7 +20,7 @@ class PinFixer {
 	static get hudScale()     { return  Number(this.flags.pinfix?.hudScale  ?? 1); }
 	static get pinLocker()    { return Boolean(this.flags.pinfix?.pinLocker); }
 
-	static get onNotesLayer() { return canvas.activeLayer.constructor.name == "NotesLayer"; }
+	static get onNotesLayer() { return canvas.activeLayer?.constructor?.name == "NotesLayer"; }
 	static get lockPins()     { return this.enabled && this.pinLocker && !this.onNotesLayer; }
 
 	/**
@@ -158,7 +158,7 @@ class PinFixer {
 	 */
 	static shouldHide(note, scale) {
 		const flags = note.data.flags?.pinfix;
-		if (!flags) return false;
+		if (!flags || this.onNotesLayer) return false;
 		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
 	}
 	
@@ -405,6 +405,21 @@ class PinFixer {
 	}
 
 	/**
+	 * Handles the renderSceneControls Hooks
+	 *
+	 * Refreshes the hidden state of the notes
+	 * in case they might need revealed for the 
+	 * notes layer.
+	 *
+	 * @static
+	 * @param {array} args
+	 * @memberof PinFixer
+	 */
+	static renderSceneControls(...args) {
+		this.hideNotes(canvas.stage.scale.x);
+	}
+
+	/**
 	 * An object containing settings for the Pin Fixer module for a given scene
 	 *
 	 * @typedef PinFixSettings
@@ -553,9 +568,15 @@ Note.prototype._canDrag = function(user, event) {
  */
 
 Hooks.once("init", (...args) => PinFixer.init(...args));
+
+Hooks.once("ready", () => {
+	Hooks.on("renderSceneControls", (...args) => PinFixer.renderSceneControls(...args));
+})
+
 Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
 Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
 Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
+
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
 PinFixer.createHudHooks();
