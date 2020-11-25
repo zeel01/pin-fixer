@@ -1,14 +1,16 @@
-.range-slider-with-icons {
+.pin-fixer .range-slider-with-icons {
 	display: flex;
 	align-items: center;
 }
 
-.range-slider-with-icons input {
+.pin-fixer .range-slider-with-icons input[type="range"] {
 	flex: 3;
 	margin-left: 0.5em;
 	margin-right: 0.5em;
 }
 
-.range-slider-with-icons .range-value {
+.pin-fixer .range-slider-with-icons .range-editor {
+	width: 48px;
 	order: 4;
+	margin-left: 10px;
 }
