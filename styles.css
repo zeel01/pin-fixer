@@ -1,0 +1,14 @@
+.range-slider-with-icons {
+  display: flex;
+  align-items: center;
+}
+
+.range-slider-with-icons input {
+  flex: 3;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
+}
+
+.range-slider-with-icons .range-value {
+  order: 4;
+}
