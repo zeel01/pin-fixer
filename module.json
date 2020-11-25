@@ -3,9 +3,17 @@
 	"title": "Pin Fixer",
 	"description": "Modifies the behaviour of map pins so that they do not become too small to see when the map is zoomed out, or so large that they cover everything when zoomed in.",
 	"author": "zeel",
+	"authors": [
+		{
+			"name": "zeel",
+			"email": "zeel02@gmail.com",
+			"url": "https://github.com/zeel01",
+			"discord": "zeel#4200"
+		}
+	],
 	"version": "0.1.4",
 	"minimumCoreVersion": "0.6.6",
-	"compatibleCoreVersion": "0.7.5",
+	"compatibleCoreVersion": "0.7.7",
 	"scripts": [
 		"pin-fixer.js"
 	],
@@ -18,5 +26,18 @@
 	],
 	"manifest": "https://raw.githubusercontent.com/zeel01/pin-fixer/master/module.json",
 	"url": "https://github.com/zeel01/pin-fixer",
-	"download": "https://github.com/zeel01/pin-fixer/releases/download/v0.1.4/pin-fixer.zip"
+	"download": "https://github.com/zeel01/pin-fixer/releases/download/v0.1.4/pin-fixer.zip",
+	"readme": "https://github.com/zeel01/pin-fixer/blob/master/readme.md",
+	"bugs": "https://github.com/zeel01/pin-fixer/issues",
+	"changelog": "https://github.com/zeel01/pin-fixer/releases",
+	"media": [
+		{
+			"type": "cover",
+			"url": ""
+		},
+		{
+			"type": "icon",
+			"url": "https://avatars2.githubusercontent.com/u/1721836"
+		}
+	]
 }
