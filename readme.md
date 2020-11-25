@@ -13,7 +13,8 @@ With the default settings above, pins will remain the same on-screen size at all
 An additional setting "Lock Pins On Other Layers" prevents pins from being moved around accidentally. Whith this feature enabled, it is only possible to move pins while on the "Journal Notes" layer. 
 
 ## Pin Hiding
-You can configure individual pins to become hidden completely at certain zoom levels. Additional fields are added to the Note Config (double right click the note).
+You can configure individual pins to become hidden completely at certain zoom levels. Additional fields are added to the Note Config (double right click the note). Hidden notes still appear on the Notes layer.
+
 ### HUD Scaling
 The last setting pertains only to other modules that add a HUD to map pins. It tweaks these HUDs so they remain the same size as the map zooms in and out, you can configure this static size to be larger/smaller than normal by setting the scale value. A value of 1 is the default size that the module normally shows its HUD.
 
