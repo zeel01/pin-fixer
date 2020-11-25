@@ -340,19 +340,35 @@ class PinFixer {
 		else this.canvasPan(canvas, { scale: canvas.stage.scale.x });
 	}
 
+	/**
+	 * Adds event listeners to the sliders and inputs
+	 * so that they change eachothers values.
+	 *
+	 * @static
+	 * @param {jQuery} html - The HTML of the form.
+	 * @memberof PinFixer
+	 */
 	static attachEventListeners(html) {
 		const slideWrapper = html.find(".pin-fixer .range-slider-with-icons");
+		slideWrapper.find(".range-slider")
+			.change((event) => this.inputToInput(event, ".range-editor"));
+		slideWrapper.find(".range-editor")
+			.change((event) => this.inputToInput(event, ".range-slider"));
+	}
 
-		slideWrapper.find(".range-slider").change((event) => {
-			const slider = $(event.currentTarget);
-			const input = slider.siblings(".range-editor");
-			input.val(slider.val());
-		});
-		slideWrapper.find(".range-editor").change((event) => {
-			const input = $(event.currentTarget);
-			const slider = input.siblings(".range-slider");
-			slider.val(input.val());
-		});
+	/**
+	 * Sets the value of the destination to
+	 * the same value as the event target.
+	 *
+	 * @static
+	 * @param {Event} event - The percipitating input change event
+	 * @param {string} destination - The query string for the destination input
+	 * @memberof PinFixer
+	 */
+	static inputToInput(event, destination) {
+		const source = $(event.currentTarget);
+		const dest = source.siblings(destination);
+		dest.val(source.val());
 	}
 
 	/**
