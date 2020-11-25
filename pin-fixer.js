@@ -412,6 +412,24 @@ class PinFixer {
 	 */
 	
 	/**
+	 * Maps the data and property name of the PinFixSetings
+	 * to data that produces a slider in the temmplate.
+	 *
+	 * @param {PinFixSettings} data - The settings data
+	 * @param {string} name - The name of the property in the settings data
+	 * @return {object} Data needed to properly display a slider
+	 * @memberof PinFixer
+	 */
+	static mapSliderData(data, name) {
+		return {
+			name,
+			value: data[name],
+			label: `pinfix.${name}.name`,
+			description: `pinfix.${name}.desc`
+		}
+	}
+
+	/**
 	 * Retrieves the current data for the scene being configured.
 	 *
 	 * @static
@@ -429,14 +447,8 @@ class PinFixer {
 			maxScale: 1,
 			hudScale: 1
 		}
-		data.sliders = ["zoomFloor", "zoomCeil", "minScale", "maxScale", "hudScale"].map(name => {
-			return {
-				name,
-				value: data[name],
-				label: `pinfix.${name}.name`,
-				description: `pinfix.${name}.desc`
-			}
-		});
+		data.sliders = ["zoomFloor", "zoomCeil", "minScale", "maxScale", "hudScale"]
+			.map(name => this.mapSliderData(data, name));
 
 		return data;
 	}
