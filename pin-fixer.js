@@ -9,6 +9,9 @@ class PinFixer {
 	/** @type {Number} */
 	static get maxCanvScale() { return CONFIG.Canvas.maxZoom; }
 
+	/** @type {Number} */
+	static get mapScale() { return canvas.stage.scale.x; }
+
 	/** @type {object} */
 	static get flags()        { return canvas.scene.data.flags; }
 	
@@ -212,6 +215,47 @@ class PinFixer {
 	static hideNote(note, scale, unhide) {
 		note.visible = unhide || !this.shouldHide(note, scale);
 	}
+
+	/**
+	 * Show the names of all notes that should have them shown
+	 *
+	 * @static
+	 * @memberof PinFixer
+	 */
+	static showNoteNames() {
+		canvas.notes.objects.children.forEach(note =>
+			this.showNoteName(note)
+		);
+	}
+
+	/**
+	 * Show the name of a note if it should be shown
+	 *
+	 * @static
+	 * @param {Note} note - The note to show the name of
+	 * @memberof PinFixer
+	 */
+	static showNoteName(note) {
+		note.tooltip.visible = this.shouldShowName(note);
+	}
+
+	/**
+	 * Check whether or not the name of a note should be shown
+	 *
+	 * By default, the name is shown when `note._hover` is true
+	 * when it is, the name should be shown regardless of this module.
+	 * The name should only be shown when it is false if the setting
+	 * flag on the note is true *and* this module is enabled on the scene.
+	 *
+	 * @static
+	 * @param {Note} note - The note to check the status on
+	 * @return {boolean} Whether or not to show the name 
+	 * @memberof PinFixer
+	 */
+	static shouldShowName(note) {
+		const flags = note.data.flags?.pinfix;
+		return (this.enabled && flags?.showName) || note._hover;
+	}
 	
 	/**
 	 * Scale a HUD HTML by setting the CSS transform.
@@ -269,6 +313,7 @@ class PinFixer {
 	static reset() {
 		this.scaleNotes(1);
 		this.hideNotes(1, true);
+		this.showNoteNames();
 		this.resetHUDs();
 	}
 
@@ -278,7 +323,7 @@ class PinFixer {
 	 * Loads the template files
 	 *
 	 * @static
-	 * @param {object} args - Not really doing anything with the args, if there even are any
+	 * @param {array} args - Not really doing anything with the args, if there even are any
 	 * @memberof PinFixer
 	 */
 	static init(...args) {
@@ -304,8 +349,40 @@ class PinFixer {
 		if (!this.enabled) return;
 		this.scaleNotes(pan.scale);
 		this.hideNotes(pan.scale);
+		this.showNoteNames(true);
 		this.scaleHUDs(pan.scale);
 	}
+
+	/**
+	 * Handles the hoverNote Hook
+	 *
+	 * Triggers showing the names of notes that are set to always
+	 * show thier names.
+	 *
+	 * @static
+	 * @param {array} args
+	 * @memberof PinFixer
+	 */
+	static hoverNote(...args) {
+		if (!this.enabled) return;
+		this.showNoteNames(true);
+	}
+
+	/**
+	 * Handles the updateNote Hook
+	 *
+	 * Updates names that should be shown and notes that need hidden.
+	 *
+	 * @static
+	 * @param {*} args
+	 * @memberof PinFixer
+	 */
+	static updateNote(...args) {
+		this.showNoteNames(true);
+		this.hideNotes(this.mapScale);
+	}
+
+
 	/**
 	 * Handle the rendering Hooks for HUDs
 	 *
@@ -319,7 +396,7 @@ class PinFixer {
 	 */
 	static renderHUD(id, hud, html, data) {
 		if (!this.enabled) return;
-		const hudScale = this.hudScaleFactor(canvas.stage.scale.x);
+		const hudScale = this.hudScaleFactor(this.mapScale);
 		this.scaleHUD(id, hudScale);
 	}
 	/**
@@ -337,7 +414,7 @@ class PinFixer {
 	 */
 	static updateScene(scene, data, options) {
 		if (!this.enabled) this.reset();
-		else this.canvasPan(canvas, { scale: canvas.stage.scale.x });
+		else this.canvasPan(canvas, { scale: this.mapScale });
 	}
 
 	/**
@@ -416,7 +493,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static renderSceneControls(...args) {
-		this.hideNotes(canvas.stage.scale.x);
+		this.hideNotes(this.mapScale);
 	}
 
 	/**
@@ -576,7 +653,9 @@ Hooks.once("ready", () => {
 Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
 Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
 Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
+Hooks.on("hoverNote", (...args) => PinFixer.hoverNote(...args));
 
+Hooks.on("updateNote", (...args) => PinFixer.updateNote(...args));
 Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
 PinFixer.createHudHooks();

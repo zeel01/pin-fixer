@@ -39,6 +39,10 @@
 			"maxZoomLevel": {
 				"name": "Maximum Zoom Level",
 				"desc": "Pin will be hidden when zoom is greater than this level."
+			},
+			"alwaysShowName": {
+				"name": "Always Show Pin Label",
+				"desc": "Always show the label of this pin when the pin is visible."
 			}
 		}
 	}

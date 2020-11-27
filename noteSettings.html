@@ -2,6 +2,12 @@
 <h3 class="form-header"><i class="fas fa-bookmark"></i> {{ localize "pinfix.title" }}</h3>
 <p class="notes">{{ localize "pinfix.notes.description" }}</p>
 
+<div class="form-group">
+	<label>{{ localize "pinfix.notes.alwaysShowName.name" }}</label>
+	<input type="checkbox" name="flags.pinfix.showName" data-dtype="Boolean" {{#if showName}} checked{{/if}}>
+	<p class="notes">{{ localize "pinfix.notes.alwaysShowName.desc" }}</p>
+</div>
+
 <div class="pin-fixer form-group">
 	<label>{{ localize "pinfix.notes.minZoomLevel.name" }}</label>
 	<div class="range-slider-with-icons">
