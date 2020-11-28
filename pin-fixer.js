@@ -160,6 +160,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static shouldHide(note, scale) {
+		if (!note._canView()) return true;
 		const flags = note.data.flags?.pinfix;
 		if (!flags || this.onNotesLayer) return false;
 		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
