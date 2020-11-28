@@ -22,6 +22,7 @@ class PinFixer {
 	static get maxScale()     { return  Number(this.flags.pinfix?.maxScale  ?? 1); }
 	static get hudScale()     { return  Number(this.flags.pinfix?.hudScale  ?? 1); }
 	static get pinLocker()    { return Boolean(this.flags.pinfix?.pinLocker); }
+	static get aboveFog()     { return Boolean(this.flags.pinfix?.aboveFog); }
 
 	static get onNotesLayer() { return canvas.activeLayer?.constructor?.name == "NotesLayer"; }
 	static get lockPins()     { return this.enabled && this.pinLocker && !this.onNotesLayer; }
@@ -414,8 +415,9 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static updateScene(scene, data, options) {
-		if (!this.enabled) this.reset();
-		else this.canvasPan(canvas, { scale: this.mapScale });
+		if (!this.enabled) return this.reset();
+		this.pullAboveFog();
+		this.canvasPan(canvas, { scale: this.mapScale });
 	}
 
 	/**
@@ -602,6 +604,11 @@ class PinFixer {
 		return await renderTemplate("modules/pin-fixer/noteSettings.html", settings);
 	}
 
+	static pullAboveFog() {
+		if (this.aboveFog && this.enabled) canvas.notes.zIndex = 300;
+		else canvas.notes.zIndex = 60;
+	}
+
 	/**
 	 * Registers render Hooks for each HUD
 	 *
@@ -648,6 +655,7 @@ Note.prototype._canDrag = function(user, event) {
 Hooks.once("init", (...args) => PinFixer.init(...args));
 
 Hooks.once("ready", () => {
+	PinFixer.pullAboveFog();
 	Hooks.on("renderSceneControls", (...args) => PinFixer.renderSceneControls(...args));
 })
 
