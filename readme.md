@@ -12,10 +12,13 @@ With the default settings above, pins will remain the same on-screen size at all
 ### Pin Locker
 An additional setting "Lock Pins On Other Layers" prevents pins from being moved around accidentally. Whith this feature enabled, it is only possible to move pins while on the "Journal Notes" layer. 
 
-## Pin Hiding
+### Show Pins Above Fog
+Map pins and labels will display above the fog layer, including imagefog/simplefog fog layers.
+
+### Pin Hiding
 You can configure individual pins to become hidden completely at certain zoom levels. Additional fields are added to the Note Config (double right click the note). Hidden notes still appear on the Notes layer.
 
-## Always Show Pin Label
+### Always Show Pin Label
 When this option is enabled, the label of the pin will always be shown if the pin is visible, rather than only when it is hovered over.
 
 ### HUD Scaling
