@@ -11,7 +11,7 @@
 			"discord": "zeel#4200"
 		}
 	],
-	"version": "1.0.2",
+	"version": "1.0.3",
 	"minimumCoreVersion": "0.6.6",
 	"compatibleCoreVersion": "0.7.7",
 	"styles": [
@@ -29,7 +29,7 @@
 	],
 	"manifest": "https://raw.githubusercontent.com/zeel01/pin-fixer/master/module.json",
 	"url": "https://github.com/zeel01/pin-fixer",
-	"download": "https://github.com/zeel01/pin-fixer/releases/download/v1.0.2/pin-fixer.zip",
+	"download": "https://github.com/zeel01/pin-fixer/releases/download/v1.0.3/pin-fixer.zip",
 	"readme": "https://github.com/zeel01/pin-fixer/blob/master/readme.md",
 	"bugs": "https://github.com/zeel01/pin-fixer/issues",
 	"changelog": "https://github.com/zeel01/pin-fixer/releases",
