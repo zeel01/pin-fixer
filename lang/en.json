@@ -4,7 +4,7 @@
 		"description": "Make map pins scale less dramatically with zoom level.",
 		"enable": {
 			"name": "Enable",
-			"desc": "Enable or disable this feature."
+			"desc": "Enable Pin Fixer on this scene."
 		},
 		"pinLocker": {
 			"name": "Lock Pins On Other Layers",
