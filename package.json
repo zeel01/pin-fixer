@@ -1,0 +1,24 @@
+{
+  "name": "pin-fixer",
+  "version": "1.0.0",
+  "description": "Modifies the behaviour of map pins (Notes) so that they do not become too small to see when the map is zoomed out, or so large that they cover everything when zoomed in.",
+  "main": "pin-fixer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeel01/pin-fixer.git"
+  },
+  "author": "zeel",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zeel01/pin-fixer/issues"
+  },
+  "homepage": "https://github.com/zeel01/pin-fixer#readme",
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-zip": "^5.0.2",
+    "save-dev": "0.0.1-security"
+  }
+}
