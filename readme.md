@@ -1,3 +1,7 @@
+![](https://img.shields.io/badge/Foundry-v0.7.8-informational)
+![Forge Installs](https://img.shields.io/badge/dynamic/json?label=Forge%20Installs&query=package.installs&suffix=%25&url=https%3A%2F%2Fforge-vtt.com%2Fapi%2Fbazaar%2Fpackage%2Fpin-fixer&colorB=4aa94a)
+![Latest Release Download Count](https://img.shields.io/github/downloads/zeel01/pin-fixer/latest/pin-fixer.zip) 
+
 ## Pin Fixer
 Modifies the behaviour of map pins (Notes) so that they do not become too small to see when the map is zoomed out, or so large that they cover everything when zoomed in.
 
