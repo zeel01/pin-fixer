@@ -1,9 +1,9 @@
 {
 	"pinfix": {
 		"I18N": {
-            "LANGUAGE": "Español",
-            "MAINTAINERS": "@Viriato139ac#0342"
-        },
+			"LANGUAGE": "Español",
+			"MAINTAINERS": "@Viriato139ac#0342"
+		},
 		"title": "Pin Fixer",
 		"description": "Hace que se reduzca el efecto de escala de las chinchetas en el mapa al ampliar la imagen",
 		"enable": {
