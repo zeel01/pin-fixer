@@ -28,7 +28,7 @@
 		},
 		"hudScale": {
 			"name": "Pin HUD Scale",
-			"hudScale.desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
+			"desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
 		},
 		"aboveFog": {
 			"name": "Show Map Pins Above Fog",
