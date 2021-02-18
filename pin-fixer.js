@@ -549,7 +549,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static getSceneTemplateData(hookData) {
-		const data = hookData.entity?.flags?.pinfix || {
+		const data = hookData.data?.flags?.pinfix || {
 			enable: false,
 			pinLocker: false,
 			zoomFloor: this.minCanvScale,
