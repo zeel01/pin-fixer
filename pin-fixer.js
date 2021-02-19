@@ -572,7 +572,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static getNoteTemplateData(data) {
-		return data.object?.flags?.pinfix || {
+		return data.data?.flags?.pinfix || {
 			minZoomLevel: this.minCanvScale,
 			maxZoomLevel: this.maxCanvScale
 		}
