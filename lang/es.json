@@ -32,7 +32,7 @@
 		},
 		"hudScale": {
 			"name": "Escalado de HUD de chincheta",
-			"hudScale.desc": "Algunos módulos, como Pin Cushion y POI Teleporter añaden HUDs a las chinchetas del mapa. Este ajuste determina el factor de escalado de estos HUDs."
+			"desc": "Algunos módulos, como Pin Cushion y POI Teleporter añaden HUDs a las chinchetas del mapa. Este ajuste determina el factor de escalado de estos HUDs."
 		},
 		"aboveFog": {
 			"name": "Mostrar chinchetas encima de la niebla",
