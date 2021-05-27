@@ -32,7 +32,7 @@
 			"path": "lang/es.json"
 		}
 	],
-	"manifest": "https://raw.githubusercontent.com/zeel01/pin-fixer/releases/latest/download/module.json",
+	"manifest": "https://github.com/zeel01/pin-fixer/releases/latest/download/module.json",
 	"url": "https://github.com/zeel01/pin-fixer",
 	"download": "https://github.com/zeel01/pin-fixer/releases/latest/download/pin-fixer.zip",
 	"readme": "https://github.com/zeel01/pin-fixer/blob/master/readme.md",
