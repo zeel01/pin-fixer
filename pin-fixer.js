@@ -463,7 +463,11 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static async renderSceneConfig(sceneConfig, html, data) {
-		html.find(".form-group").last().after(await this.getSceneHtml(this.getSceneTemplateData(data)));
+		const ambItem = html.find(".item[data-tab=ambience]");
+		const ambTab  = html.find(".tab[data-tab=ambience]");
+
+		ambItem.after(`<a class="item" data-tab="pin-fixer"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pinfix.title")}</a>`);
+		ambTab.after(await this.getSceneHtml(this.getSceneTemplateData(data)));
 		this.attachEventListeners(html);
 	}
 
