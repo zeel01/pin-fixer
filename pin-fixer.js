@@ -157,13 +157,15 @@ class PinFixer {
 	 * @static
 	 * @param {Note} note - The note that might be hidden
 	 * @param {number} scale - The current scale of the scene
+	 * @param {boolean} unhide - If true, unhide regardless of scale
 	 * @return {boolean} 
 	 * @memberof PinFixer
 	 */
-	static shouldHide(note, scale) {
-		if (!note._canView()) return true;
+	static shouldHide(note, scale, unhide) {
+		if (!(note.entry?.testUserPermission(game.user, "LIMITED") ?? true)) return true;
 		const flags = note.data.flags?.pinfix;
 		if (!flags || this.onNotesLayer) return false;
+		if (unhide) return false;
 		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
 	}
 	
@@ -215,7 +217,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static hideNote(note, scale, unhide) {
-		note.visible = unhide || !this.shouldHide(note, scale);
+		note.visible = !this.shouldHide(note, scale, unhide);
 	}
 
 	/**
