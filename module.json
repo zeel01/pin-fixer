@@ -11,9 +11,9 @@
 			"discord": "zeel#4200"
 		}
 	],
-	"version": "1.1.2",
-	"minimumCoreVersion": "0.8.5",
-	"compatibleCoreVersion": "0.8.6",
+	"version": "1.2.1",
+	"minimumCoreVersion": "9",
+	"compatibleCoreVersion": "9",
 	"styles": [
 		"pin-fixer.css"
 	],
