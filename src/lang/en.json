@@ -1,5 +1,5 @@
 {
-	"pinfix": {
+	"pin-fixer": {
 		"title": "Pin Fixer",
 		"description": "Make map pins scale less dramatically with zoom level.",
 		"enable": {

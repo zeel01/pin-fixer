@@ -3,7 +3,7 @@
  *
  * @class PinFixer
  */
-class PinFixer {
+export class PinFixer {
 	/** @type {Number} */ 
 	static get minCanvScale() { return 0.1; }
 	/** @type {Number} */
@@ -15,14 +15,14 @@ class PinFixer {
 	/** @type {object} */
 	static get flags()        { return canvas.scene.data.flags; }
 	
-	static get enabled()      { return Boolean(this.flags.pinfix?.enable); }
-	static get zoomFloor()    { return  Number(this.flags.pinfix?.zoomFloor ?? this.minCanvScale); }
-	static get zoomCeil()     { return  Number(this.flags.pinfix?.zoomCeil  ?? this.maxCanvScale); }
-	static get minScale()     { return  Number(this.flags.pinfix?.minScale  ?? 1); }
-	static get maxScale()     { return  Number(this.flags.pinfix?.maxScale  ?? 1); }
-	static get hudScale()     { return  Number(this.flags.pinfix?.hudScale  ?? 1); }
-	static get pinLocker()    { return Boolean(this.flags.pinfix?.pinLocker); }
-	static get aboveFog()     { return Boolean(this.flags.pinfix?.aboveFog); }
+	static get enabled()      { return Boolean(this.flags.pin-fixer?.enable); }
+	static get zoomFloor()    { return  Number(this.flags.pin-fixer?.zoomFloor ?? this.minCanvScale); }
+	static get zoomCeil()     { return  Number(this.flags.pin-fixer?.zoomCeil  ?? this.maxCanvScale); }
+	static get minScale()     { return  Number(this.flags.pin-fixer?.minScale  ?? 1); }
+	static get maxScale()     { return  Number(this.flags.pin-fixer?.maxScale  ?? 1); }
+	static get hudScale()     { return  Number(this.flags.pin-fixer?.hudScale  ?? 1); }
+	static get pinLocker()    { return Boolean(this.flags.pin-fixer?.pinLocker); }
+	static get aboveFog()     { return Boolean(this.flags.pin-fixer?.aboveFog); }
 
 	static get onNotesLayer() { return canvas.activeLayer?.constructor?.name == "NotesLayer"; }
 	static get lockPins()     { return this.enabled && this.pinLocker && !this.onNotesLayer; }
@@ -162,7 +162,7 @@ class PinFixer {
 	 */
 	static shouldHide(note, scale) {
 		if (!note._canView()) return true;
-		const flags = note.data.flags?.pinfix;
+		const flags = note.data.flags?.pin-fixer;
 		if (!flags || this.onNotesLayer) return false;
 		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
 	}
@@ -255,7 +255,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static shouldShowName(note) {
-		const flags = note.data.flags?.pinfix;
+		const flags = note.data.flags?.pin-fixer;
 		return (this.enabled && flags?.showName) || note._hover;
 	}
 	
@@ -466,7 +466,7 @@ class PinFixer {
 		const ambItem = html.find(".item[data-tab=ambience]");
 		const ambTab  = html.find(".tab[data-tab=ambience]");
 
-		ambItem.after(`<a class="item" data-tab="pin-fixer"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pinfix.title")}</a>`);
+		ambItem.after(`<a class="item" data-tab="pin-fixer"><i class="fas fa-bookmark"></i> ${game.i18n.localize("pin-fixer.title")}</a>`);
 		ambTab.after(await this.getSceneHtml(this.getSceneTemplateData(data)));
 		this.attachEventListeners(html);
 	}
@@ -539,8 +539,8 @@ class PinFixer {
 		return {
 			name,
 			value: data[name],
-			label: `pinfix.${name}.name`,
-			description: `pinfix.${name}.desc`
+			label: `pin-fixer.${name}.name`,
+			description: `pin-fixer.${name}.desc`
 		}
 	}
 
@@ -553,7 +553,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static getSceneTemplateData(hookData) {
-		const data = hookData.data?.flags?.pinfix || {
+		const data = hookData.data?.flags?.pin-fixer || {
 			enable: false,
 			pinLocker: false,
 			zoomFloor: this.minCanvScale,
@@ -576,7 +576,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static getNoteTemplateData(data) {
-		return data.data?.flags?.pinfix || {
+		return data.data?.flags?.pin-fixer || {
 			minZoomLevel: this.minCanvScale,
 			maxZoomLevel: this.maxCanvScale
 		}
@@ -626,49 +626,49 @@ class PinFixer {
 	}
 }
 
-/**
- * This scetion is a money-patch of Note#_canDrag()
- * by making thie method return false dragging can be prevented.
- */
+// /**
+//  * This scetion is a money-patch of Note#_canDrag()
+//  * by making thie method return false dragging can be prevented.
+//  */
 
-// Copy the original method
-PinFixer.noteCanDrag = Note.prototype._canDrag;
+// // Copy the original method
+// PinFixer.noteCanDrag = Note.prototype._canDrag;
 
-/**
- * This patched method returns false either when
- * the user has insufficient permissions, or
- * when the pin locking feature is enabled.
- * This prevents pins from being moved in
- * unwanted contexts.
- *
- * @param {User} user - The current user
- * @param {Event} event - The precipitating event
- * @return {boolean} Whether or not dragging the note is permitted for the user on this layer
- * @memberof Note
- */
-Note.prototype._canDrag = function(user, event) {
-	if (PinFixer.lockPins) return false;
-	else return PinFixer.noteCanDrag.bind(this)(user, event); // When lockPins isn't true, return the result of the original method
-}
+// /**
+//  * This patched method returns false either when
+//  * the user has insufficient permissions, or
+//  * when the pin locking feature is enabled.
+//  * This prevents pins from being moved in
+//  * unwanted contexts.
+//  *
+//  * @param {User} user - The current user
+//  * @param {Event} event - The precipitating event
+//  * @return {boolean} Whether or not dragging the note is permitted for the user on this layer
+//  * @memberof Note
+//  */
+// Note.prototype._canDrag = function(user, event) {
+// 	if (PinFixer.lockPins) return false;
+// 	else return PinFixer.noteCanDrag.bind(this)(user, event); // When lockPins isn't true, return the result of the original method
+// }
 
 /**
  * This is the Hooks section, hooks are registered here to call methods
  * of PinFixer with all arguments.
  */
 
-Hooks.once("init", (...args) => PinFixer.init(...args));
+// Hooks.once("init", (...args) => PinFixer.init(...args));
 
-Hooks.once("ready", () => {
-	PinFixer.pullAboveFog();
-	Hooks.on("renderSceneControls", (...args) => PinFixer.renderSceneControls(...args));
-})
+// Hooks.once("ready", () => {
+// 	PinFixer.pullAboveFog();
+// 	Hooks.on("renderSceneControls", (...args) => PinFixer.renderSceneControls(...args));
+// })
 
-Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
-Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
-Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
-Hooks.on("hoverNote", (...args) => PinFixer.hoverNote(...args));
+// Hooks.on("canvasPan", (...args) => PinFixer.canvasPan(...args));
+// Hooks.on("renderSceneConfig", (...args) => PinFixer.renderSceneConfig(...args));
+// Hooks.on("renderNoteConfig", (...args) => PinFixer.renderNoteConfig(...args));
+// Hooks.on("hoverNote", (...args) => PinFixer.hoverNote(...args));
 
-Hooks.on("updateNote", (...args) => PinFixer.updateNote(...args));
-Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
+// Hooks.on("updateNote", (...args) => PinFixer.updateNote(...args));
+// Hooks.on("updateScene", (...args) => PinFixer.updateScene(...args));
 
-PinFixer.createHudHooks();
+// PinFixer.createHudHooks();
