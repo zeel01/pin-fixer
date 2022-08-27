@@ -24,28 +24,52 @@ export class PinFixer {
   }
 
   static get enabled() {
+    if (!this.flags) {
+      return false;
+    }
     return Boolean(this.flags['pin-fixer']?.enable);
   }
   static get zoomFloor() {
+    if (!this.flags) {
+      return this.minCanvScale;
+    }
     return Number(this.flags['pin-fixer']?.zoomFloor ?? this.minCanvScale);
   }
   static get zoomCeil() {
+    if (!this.flags) {
+      return this.maxCanvScale;
+    }
     return Number(this.flags['pin-fixer']?.zoomCeil ?? this.maxCanvScale);
   }
   static get minScale() {
+    if (!this.flags) {
+      return 1;
+    }
     return Number(this.flags['pin-fixer']?.minScale ?? 1);
   }
   static get maxScale() {
+    if (!this.flags) {
+      return 1;
+    }
     return Number(this.flags['pin-fixer']?.maxScale ?? 1);
   }
   static get hudScale() {
+    if (!this.flags) {
+      return 1;
+    }
     return Number(this.flags['pin-fixer']?.hudScale ?? 1);
   }
   static get pinLocker() {
-    return Boolean(this.flags['pin-fixer']?.pinLocker);
+    if (!this.flags) {
+      return false;
+    }
+    return Boolean(this.flags['pin-fixer']?.pinLocker ?? false);
   }
   static get aboveFog() {
-    return Boolean(this.flags['pin-fixer']?.aboveFog);
+    if (!this.flags) {
+      return false;
+    }
+    return Boolean(this.flags['pin-fixer']?.aboveFog ?? false);
   }
 
   static get onNotesLayer() {
@@ -191,9 +215,13 @@ export class PinFixer {
    * @memberof PinFixer
    */
   static shouldHide(note, scale) {
-    if (!note._canView()) return true;
-    const flags = note.data.flags['pin-fixer'];
-    if (!flags || this.onNotesLayer) return false;
+    if (!note._canView()) {
+      return true;
+    }
+    const flags = note.data.flags ? note.data.flags['pin-fixer'] : undefined;
+    if (!flags || this.onNotesLayer) {
+      return false;
+    }
     return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
   }
 
@@ -279,7 +307,7 @@ export class PinFixer {
    * @memberof PinFixer
    */
   static shouldShowName(note) {
-    const flags = note.data.flags['pin-fixer'];
+    const flags = note.data.flags ? note.data.flags['pin-fixer'] : undefined;
     return (this.enabled && flags?.showName) || note._hover;
   }
 
@@ -581,7 +609,7 @@ export class PinFixer {
    * @memberof PinFixer
    */
   static getSceneTemplateData(hookData) {
-    const data = hookData.data?.flags['pin-fixer'] || {
+    let data = {
       enable: false,
       pinLocker: false,
       zoomFloor: this.minCanvScale,
@@ -590,6 +618,9 @@ export class PinFixer {
       maxScale: 1,
       hudScale: 1,
     };
+    if (hookData.data?.flags && hookData.data?.flags['pin-fixer']) {
+      data = hookData.data?.flags['pin-fixer'];
+    }
     data.sliders = ['zoomFloor', 'zoomCeil', 'minScale', 'maxScale', 'hudScale'].map((name) =>
       this.mapSliderData(data, name),
     );
