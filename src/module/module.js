@@ -1,15 +1,19 @@
 import './api.js';
+import API from './api.js';
 import CONSTANTS from './constants.js';
 import { warn } from './lib/lib.js';
 import { PinFixer } from './pin-fixer.js';
+import { registerSocket } from './socket.js';
 
 export const initHooks = (...args) => {
   warn('Init Hooks processing');
-  // setup all the hooks
+
+  Hooks.once('socketlib.ready', registerSocket);
   PinFixer.init(...args);
 };
 export const setupHooks = () => {
   warn('Setup Hooks processing');
+  setApi(API);
 };
 export const readyHooks = async () => {
   warn('Ready Hooks processing');

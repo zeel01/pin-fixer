@@ -2,20 +2,37 @@
   "name": "pin-fixer",
   "title": "Pin Fixer",
   "description": "Modifies the behaviour of map pins so that they do not become too small to see when the map is zoomed out, or so large that they cover everything when zoomed in.",
-  "author": "zeel",
+  "version": "1.3.0",
+  "author": "zeel, p4535992",
   "authors": [
     {
       "name": "zeel",
       "email": "zeel02@gmail.com",
       "url": "https://github.com/zeel01",
       "discord": "zeel#4200"
+    },
+    {
+      "name": "p4535992",
+      "url": "https://github.com/p4535992",
+      "discord": "",
+      "twitter": "",
+      "patreon": "p4535992",
+      "github": "p4535992",
+      "ko-fi": "",
+      "reddit": "",
+      "email": ""
     }
   ],
-  "version": "1.2.1",
-  "minimumCoreVersion": "9",
-  "compatibleCoreVersion": "9",
-  "styles": ["pin-fixer.css"],
-  "scripts": ["pin-fixer.js"],
+  "media": [
+    {
+      "type": "cover",
+      "url": "https://raw.githubusercontent.com/zeel01/pin-fixer/master/cover.png"
+    },
+    {
+      "type": "icon",
+      "url": "https://avatars2.githubusercontent.com/u/1721836"
+    }
+  ],
   "languages": [
     {
       "lang": "en",
@@ -28,20 +45,46 @@
       "path": "lang/es.json"
     }
   ],
-  "manifest": "https://github.com/zeel01/pin-fixer/releases/latest/download/module.json",
-  "url": "https://github.com/zeel01/pin-fixer",
-  "download": "https://github.com/zeel01/pin-fixer/releases/latest/download/pin-fixer.zip",
-  "readme": "https://github.com/zeel01/pin-fixer/blob/master/readme.md",
-  "bugs": "https://github.com/zeel01/pin-fixer/issues",
-  "changelog": "https://github.com/zeel01/pin-fixer/releases",
-  "media": [
+  "version": "1.2.1",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "scripts": [],
+  "system": [],
+  "esmodules": ["main.js"],
+  "styles": ["styles/pin-fixer.css"],
+  "socket": true,
+  "packs": [],
+  "url": "https://github.com/p4535992/foundryvtt-pin-fixer",
+  "manifest": "https://github.com/p4535992/foundryvtt-pin-fixer/releases/latest/download/module.json",
+  "download": "https://github.com/p4535992/foundryvtt-pin-fixer/releases/latest/download/module.zip",
+  "readme": "https://github.com/p4535992/foundryvtt-pin-fixer/blob/v1.3.0/README.md",
+  "changelog": "https://github.com/p4535992/foundryvtt-pin-fixer/blob/v1.3.0/CHANGELOG.md",
+  "bugs": "https://github.com/p4535992/foundryvtt-pin-fixer/issues",
+  "minimumCoreVersion": "9",
+  "compatibleCoreVersion": "9",
+  "compatibility": {
+    "minimum": 9,
+    "verified": 9,
+    "maximum": 9
+  },
+  "allowBugReporter": true,
+  "manifestPlusVersion": "1.2.0",
+  "dependencies": [
     {
-      "type": "cover",
-      "url": "https://raw.githubusercontent.com/zeel01/pin-fixer/master/cover.png"
-    },
-    {
-      "type": "icon",
-      "url": "https://avatars2.githubusercontent.com/u/1721836"
+      "name": "lib-wrapper"
     }
-  ]
+  ],
+  "relationships": {
+    "requires": [
+      {
+        "id": "lib-wrapper",
+        "manifest": "https://github.com/ruipin/fvtt-lib-wrapper/releases/latest/download/module.json"
+      }
+    ]
+  },
+  "flags": {
+    "manifestPlusVersion": "1.2.0",
+    "allowBugReporter": true,
+    "conflicts": []
+  }
 }

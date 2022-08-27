@@ -38,21 +38,16 @@ Hooks.once('setup', function () {
 /* ------------------------------------ */
 Hooks.once('ready', async () => {
   // Do anything once the module is ready
-  // if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
-  //   let word = 'install and activate';
-  //   if (game.modules.get('lib-wrapper')) word = 'activate';
-  //   throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
-  // }
+  if (!game.modules.get('lib-wrapper')?.active && game.user?.isGM) {
+    let word = 'install and activate';
+    if (game.modules.get('lib-wrapper')) word = 'activate';
+    throw error(`Requires the 'libWrapper' module. Please ${word} it.`);
+  }
   // if (!game.modules.get('socketLib')?.active && game.user?.isGM) {
   //   let word = 'install and activate';
   //   if (game.modules.get('socketLib')) word = 'activate';
   //   throw error(`Requires the 'socketLib' module. Please ${word} it.`);
   // }
-  if (!game.modules.get('active-effect-manager-lib')?.active && game.user?.isGM) {
-    let word = 'install and activate';
-    if (game.modules.get('active-effect-manager-lib')) word = 'activate';
-    throw error(`Requires the 'active-effect-manager-lib' module. Please ${word} it.`);
-  }
   readyHooks();
 });
 /**
