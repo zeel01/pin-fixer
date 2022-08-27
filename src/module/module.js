@@ -1,14 +1,13 @@
+import { setApi } from '../main.js';
 import './api.js';
 import API from './api.js';
 import CONSTANTS from './constants.js';
 import { warn } from './lib/lib.js';
 import { PinFixer } from './pin-fixer.js';
-import { registerSocket } from './socket.js';
 
 export const initHooks = (...args) => {
   warn('Init Hooks processing');
 
-  Hooks.once('socketlib.ready', registerSocket);
   PinFixer.init(...args);
 };
 export const setupHooks = () => {
@@ -44,6 +43,7 @@ export const readyHooks = async () => {
 
   PinFixer.createHudHooks();
 
+  // eslint-disable-next-line no-undef
   libWrapper.register(CONSTANTS.MODULE_NAME, 'Note.prototype._canDrag', NotePrototypeCanDragHandler, 'MIXED');
 };
 

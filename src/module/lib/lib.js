@@ -2,7 +2,6 @@
 // Module Generic function
 // =============================
 import CONSTANTS from '../constants.js';
-import { pinFixerSocket } from '../socket.js';
 
 export async function getToken(documentUuid) {
   const document = await fromUuid(documentUuid);
@@ -63,9 +62,7 @@ export function is_real_number(inNumber) {
 export function isGMConnected() {
   return !!Array.from(game.users).find((user) => user.isGM && user.active);
 }
-export function isGMConnectedAndSocketLibEnable() {
-  return isGMConnected(); // && !game.settings.get(CONSTANTS.MODULE_NAME, 'doNotUseSocketLibFeature');
-}
+
 export function wait(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -295,9 +292,11 @@ function getElevationPlaceableObject(placeableObject) {
     //@ts-ignore
     typeof _levels !== 'undefined' &&
     //@ts-ignore
+    // eslint-disable-next-line no-undef
     _levels?.advancedLOS &&
     (placeableObject instanceof Token || placeableObject instanceof TokenDocument)
       ? //@ts-ignore
+        // eslint-disable-next-line no-undef
         _levels.getTokenLOSheight(placeableObject)
       : base.elevation ??
         base.flags['levels']?.elevation ??
