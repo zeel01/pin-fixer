@@ -3,17 +3,17 @@
 	<div class="form-group">
 		<label>{{ localize "pin-fixer.enable.name" }}</label>
 		<input type="checkbox" name="flags.pin-fixer.enable" data-dtype="Boolean"{{#if enable}} checked{{/if}}>
-		<p class="notes">{{ localize "pin-fixer.enable.desc" }}</p>
+		<p class="notes">{{ localize "pin-fixer.enable.hint" }}</p>
 	</div>
 	<div class="form-group">
 		<label>{{ localize "pin-fixer.pinLocker.name" }}</label>
 		<input type="checkbox" name="flags.pin-fixer.pinLocker" data-dtype="Boolean"{{#if pinLocker}} checked{{/if}}>
-		<p class="notes">{{ localize "pin-fixer.pinLocker.desc" }}</p>
+		<p class="notes">{{ localize "pin-fixer.pinLocker.hint" }}</p>
 	</div>
 	<div class="form-group">
 		<label>{{ localize "pin-fixer.aboveFog.name" }}</label>
 		<input type="checkbox" name="flags.pin-fixer.aboveFog" data-dtype="Boolean" {{#if aboveFog}} checked{{/if}}>
-		<p class="notes">{{ localize "pin-fixer.aboveFog.desc" }}</p>
+		<p class="notes">{{ localize "pin-fixer.aboveFog.hint" }}</p>
 	</div>
 	{{#each sliders}}
 		<div class="pin-fixer form-group">

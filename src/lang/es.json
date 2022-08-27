@@ -1,57 +1,57 @@
 {
-	"pin-fixer": {
-		"I18N": {
-			"LANGUAGE": "Español",
-			"MAINTAINERS": "@Viriato139ac#0342"
-		},
-		"title": "Pin Fixer",
-		"description": "Hace que se reduzca el efecto de escala de las chinchetas en el mapa al ampliar la imagen",
-		"enable": {
-			"name": "Habilitar",
-			"desc": "Habilita Pin Fixer para esta escena"
-		},
-		"pinLocker": {
-			"name": "Bloquear chinchetas en otras capas",
-			"desc": "Evita que se puedan mover las chinchetas cuando no se está en la capa de notas"
-		},
-		"minScale": {
-			"name": "Escalado mínimo",
-			"desc": "El menor escalado permitido para chinchetas en el mapa (cuando se aleja al máximo)"
-		},
-		"maxScale": {
-			"name": "Escalado máximo",
-			"desc": "El mayor escalado permitido para chinchetas en el mapa (cuando se acerca al máximo)"
-		},
-		"zoomFloor": {
-			"name": "Cota inferior de ampliación",
-			"desc": "La escala de la chincheta ya no cambiará más cuando se aleje más que esta cota"
-		},
-		"zoomCeil": {
-			"name": "Cota superior de ampliación",
-			"desc": "La escala de la chincheta ya no cambiará más cuando se acerque más que esta cota"
-		},
-		"hudScale": {
-			"name": "Escalado de HUD de chincheta",
-			"desc": "Algunos módulos, como Pin Cushion y POI Teleporter añaden HUDs a las chinchetas del mapa. Este ajuste determina el factor de escalado de estos HUDs."
-		},
-		"aboveFog": {
-			"name": "Mostrar chinchetas encima de la niebla",
-			"desc": "Las chinchetas y sus etiquetas se mostrarán por encima de la capa de niebla, incluyendo las capas de niebla imagefog/simplefog"
-		},
-		"notes": {
-			"description": "Oculta las chinchetas por encima/debajo de ciertos niveles de ampliación. Asegúrese de que el mínimo sea siempre menor que el máximo o la nota no se mostrará nunca en el mapa (rango por defecto: 0.1 - 3)",
-			"minZoomLevel": {
-				"name": "Nivel mínimo de ampliación",
-				"desc": "Se ocultará la chincheta cuando el nivel de ampliación sea menor a este nivel"
-			},
-			"maxZoomLevel": {
-				"name": "Nivel máxmo de ampliación",
-				"desc": "Se ocultará la chincheta cuando el nivel de ampliación sea mayor a este nivel"
-			},
-			"alwaysShowName": {
-				"name": "Mostrar siempre la etiqueta de la chincheta",
-				"desc": "Mostrar siempre la etiqueta de esta chincheta cuando sea visible"
-			}
-		}
-	}
+  "pin-fixer": {
+    "I18N": {
+      "LANGUAGE": "Español",
+      "MAINTAINERS": "@Viriato139ac#0342"
+    },
+    "title": "Pin Fixer",
+    "description": "Hace que se reduzca el efecto de escala de las chinchetas en el mapa al ampliar la imagen",
+    "enable": {
+      "name": "Habilitar",
+      "hint": "Habilita Pin Fixer para esta escena"
+    },
+    "pinLocker": {
+      "name": "Bloquear chinchetas en otras capas",
+      "hint": "Evita que se puedan mover las chinchetas cuando no se está en la capa de notas"
+    },
+    "minScale": {
+      "name": "Escalado mínimo",
+      "hint": "El menor escalado permitido para chinchetas en el mapa (cuando se aleja al máximo)"
+    },
+    "maxScale": {
+      "name": "Escalado máximo",
+      "hint": "El mayor escalado permitido para chinchetas en el mapa (cuando se acerca al máximo)"
+    },
+    "zoomFloor": {
+      "name": "Cota inferior de ampliación",
+      "hint": "La escala de la chincheta ya no cambiará más cuando se aleje más que esta cota"
+    },
+    "zoomCeil": {
+      "name": "Cota superior de ampliación",
+      "hint": "La escala de la chincheta ya no cambiará más cuando se acerque más que esta cota"
+    },
+    "hudScale": {
+      "name": "Escalado de HUD de chincheta",
+      "hint": "Algunos módulos, como Pin Cushion y POI Teleporter añaden HUDs a las chinchetas del mapa. Este ajuste determina el factor de escalado de estos HUDs."
+    },
+    "aboveFog": {
+      "name": "Mostrar chinchetas encima de la niebla",
+      "hint": "Las chinchetas y sus etiquetas se mostrarán por encima de la capa de niebla, incluyendo las capas de niebla imagefog/simplefog"
+    },
+    "notes": {
+      "description": "Oculta las chinchetas por encima/debajo de ciertos niveles de ampliación. Asegúrese de que el mínimo sea siempre menor que el máximo o la nota no se mostrará nunca en el mapa (rango por defecto: 0.1 - 3)",
+      "minZoomLevel": {
+        "name": "Nivel mínimo de ampliación",
+        "hint": "Se ocultará la chincheta cuando el nivel de ampliación sea menor a este nivel"
+      },
+      "maxZoomLevel": {
+        "name": "Nivel máxmo de ampliación",
+        "hint": "Se ocultará la chincheta cuando el nivel de ampliación sea mayor a este nivel"
+      },
+      "alwaysShowName": {
+        "name": "Mostrar siempre la etiqueta de la chincheta",
+        "hint": "Mostrar siempre la etiqueta de esta chincheta cuando sea visible"
+      }
+    }
+  }
 }

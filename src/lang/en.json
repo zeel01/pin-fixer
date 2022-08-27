@@ -1,53 +1,53 @@
 {
-	"pin-fixer": {
-		"title": "Pin Fixer",
-		"description": "Make map pins scale less dramatically with zoom level.",
-		"enable": {
-			"name": "Enable",
-			"desc": "Enable Pin Fixer on this scene."
-		},
-		"pinLocker": {
-			"name": "Lock Pins On Other Layers",
-			"desc": "Prevent pins from being dragged when not on the notes layer."
-		},
-		"minScale": {
-			"name": "Min Scale",
-			"desc": "The smallest scale for map pins (zoomed all the way out)."
-		},
-		"maxScale": {
-			"name": "Max Scale",
-			"desc": "The largest scale for map pins (zoomed all the way in)."
-		},
-		"zoomFloor": {
-			"name": "Zoom Floor",
-			"desc": "The pin scale won't change when zoomed out further than this."
-		},
-		"zoomCeil": {
-			"name": "Zoom Ceiling",
-			"desc": "The pin scale won't change when zoomed in further than this."
-		},
-		"hudScale": {
-			"name": "Pin HUD Scale",
-			"desc": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
-		},
-		"aboveFog": {
-			"name": "Show Map Pins Above Fog",
-			"desc": "Map pins and labels will display above the fog layer, including imagefog/simplefog fog layers."
-		},
-		"notes": {
-			"description": "Hide pins below or above certain zoom levels. Don't let the minimum be equal to or greater than the maximum, or the note will never be displayed. (default range is 0.1 - 3)",
-			"minZoomLevel": {
-				"name": "Minimum Zoom Level",
-				"desc": "Pin will be hidden when zoom is less than this level."
-			},
-			"maxZoomLevel": {
-				"name": "Maximum Zoom Level",
-				"desc": "Pin will be hidden when zoom is greater than this level."
-			},
-			"alwaysShowName": {
-				"name": "Always Show Pin Label",
-				"desc": "Always show the label of this pin when the pin is visible."
-			}
-		}
-	}
+  "pin-fixer": {
+    "title": "Pin Fixer",
+    "description": "Make map pins scale less dramatically with zoom level.",
+    "enable": {
+      "name": "Enable",
+      "hint": "Enable Pin Fixer on this scene."
+    },
+    "pinLocker": {
+      "name": "Lock Pins On Other Layers",
+      "hint": "Prevent pins from being dragged when not on the notes layer."
+    },
+    "minScale": {
+      "name": "Min Scale",
+      "hint": "The smallest scale for map pins (zoomed all the way out)."
+    },
+    "maxScale": {
+      "name": "Max Scale",
+      "hint": "The largest scale for map pins (zoomed all the way in)."
+    },
+    "zoomFloor": {
+      "name": "Zoom Floor",
+      "hint": "The pin scale won't change when zoomed out further than this."
+    },
+    "zoomCeil": {
+      "name": "Zoom Ceiling",
+      "hint": "The pin scale won't change when zoomed in further than this."
+    },
+    "hudScale": {
+      "name": "Pin HUD Scale",
+      "hint": "Some modules, such as Pin Cushion and POI Teleporter add HUDs to map pins. This setting adjusts scale factor for those HUDs."
+    },
+    "aboveFog": {
+      "name": "Show Map Pins Above Fog",
+      "hint": "Map pins and labels will display above the fog layer, including imagefog/simplefog fog layers."
+    },
+    "notes": {
+      "description": "Hide pins below or above certain zoom levels. Don't let the minimum be equal to or greater than the maximum, or the note will never be displayed. (default range is 0.1 - 3)",
+      "minZoomLevel": {
+        "name": "Minimum Zoom Level",
+        "hint": "Pin will be hidden when zoom is less than this level."
+      },
+      "maxZoomLevel": {
+        "name": "Maximum Zoom Level",
+        "hint": "Pin will be hidden when zoom is greater than this level."
+      },
+      "alwaysShowName": {
+        "name": "Always Show Pin Label",
+        "hint": "Always show the label of this pin when the pin is visible."
+      }
+    }
+  }
 }

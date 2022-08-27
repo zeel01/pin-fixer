@@ -5,7 +5,7 @@
 <div class="form-group">
 	<label>{{ localize "pin-fixer.notes.alwaysShowName.name" }}</label>
 	<input type="checkbox" name="flags.pin-fixer.showName" data-dtype="Boolean" {{#if showName}} checked{{/if}}>
-	<p class="notes">{{ localize "pin-fixer.notes.alwaysShowName.desc" }}</p>
+	<p class="notes">{{ localize "pin-fixer.notes.alwaysShowName.hint" }}</p>
 </div>
 
 <div class="pin-fixer form-group">
@@ -16,7 +16,7 @@
 		<input type="number" class="range-editor" value="{{minZoomLevel}}" max="3" min="0.1" step="0.1">
 		<i class="fas fa-search-plus"></i>
 	</div>
-	<p class="notes">{{ localize "pin-fixer.notes.minZoomLevel.desc" }}</p>
+	<p class="notes">{{ localize "pin-fixer.notes.minZoomLevel.hint" }}</p>
 </div>
 
 <div class="pin-fixer form-group">
@@ -27,5 +27,5 @@
 		<input type="number" class="range-editor" value="{{maxZoomLevel}}" min="0.1" max="3" step="0.1">
 		<i class="fas fa-search-plus"></i>
 	</div>
-	<p class="notes">{{ localize "pin-fixer.notes.maxZoomLevel.desc" }}</p>
+	<p class="notes">{{ localize "pin-fixer.notes.maxZoomLevel.hint" }}</p>
 </div>

@@ -1,16 +1,16 @@
 .pin-fixer .range-slider-with-icons {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
-.pin-fixer .range-slider-with-icons input[type="range"] {
-	flex: 3;
-	margin-left: 0.5em;
-	margin-right: 0.5em;
+.pin-fixer .range-slider-with-icons input[type='range'] {
+  flex: 3;
+  margin-left: 0.5em;
+  margin-right: 0.5em;
 }
 
 .pin-fixer .range-slider-with-icons .range-editor {
-	width: 48px;
-	order: 4;
-	margin-left: 10px;
+  width: 48px;
+  order: 4;
+  margin-left: 10px;
 }
