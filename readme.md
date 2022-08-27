@@ -18,8 +18,6 @@ Modifies the behaviour of map pins (Notes) so that they do not become too small 
 
 Scale factors and limits are configurable per-scene via the Scene Config menu.
 
-![Config Options](wiki/config.png)
-
 With the default settings above, pins will remain the same on-screen size at all times. By increasing the Max Scale, they will become larger when zoomed it, by decreasing the Min Scale, they will become smaller when zoomed out. The Zoom Floor and Ceiling are hard cut-offs, beyond which no further scaling will occur.
 
 *Example:* If you wish to have pins get no larger than 2x normal size, no smaller than .75x normal size, and not get smaller when the canvas is scaled smaller than .5, your settings are (in order): `.75, 2, .5, 3`.
@@ -42,8 +40,13 @@ To install this module manually:
 
 This module uses the [libWrapper](https://github.com/ruipin/fvtt-lib-wrapper) library for wrapping core methods. It is a hard dependency and it is recommended for the best experience and compatibility with other modules.
 
-## Settings
-- **ffè**: 
+## Settings on Note
+
+![Config Options](wiki/cover.png)
+
+## Settings on Scene
+
+![Config Options](wiki/config.png)
 
 ## Features
 
