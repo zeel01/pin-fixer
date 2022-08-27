@@ -1,4 +1,4 @@
-# Pin Cushion
+# Pin Fixer
 
 ![GitHub issues](https://img.shields.io/github/issues-raw/p4535992/foundryvtt-pin-fixer?style=for-the-badge)
 
