@@ -48,6 +48,11 @@
         "name": "Always Show Pin Label",
         "desc": "Always show the label of this pin when the pin is visible."
       }
+    },
+    "debug": {
+      "name": "Enable debugging",
+      "label": "Prints debug messages to the console",
+      "hint": " "
     }
   }
 }
