@@ -215,7 +215,11 @@ export class PinFixer {
    * @memberof PinFixer
    */
   static shouldHide(note, scale) {
-    if (!note._canView()) {
+    // Bug fix https://github.com/zeel01/pin-fixer/pull/12
+    // if (!note._canView()) {
+    //   return true;
+    // }
+    if (!(note.entry?.testUserPermission(game.user, "LIMITED") ?? true)) {
       return true;
     }
     const flags = note.data.flags ? note.data.flags['pin-fixer'] : undefined;
