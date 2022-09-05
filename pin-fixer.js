@@ -13,7 +13,7 @@ class PinFixer {
 	static get mapScale() { return canvas.stage.scale.x; }
 
 	/** @type {object} */
-	static get flags()        { return canvas.scene.data.flags; }
+	static get flags()        { return canvas.scene.flags; }
 	
 	static get enabled()      { return Boolean(this.flags.pinfix?.enable); }
 	static get zoomFloor()    { return  Number(this.flags.pinfix?.zoomFloor ?? this.minCanvScale); }
@@ -162,7 +162,7 @@ class PinFixer {
 	 */
 	static shouldHide(note, scale) {
 		if (!note._canView()) return true;
-		const flags = note.data.flags?.pinfix;
+		const flags = note.document.flags?.pinfix;
 		if (!flags || this.onNotesLayer) return false;
 		return flags.minZoomLevel > scale || flags.maxZoomLevel < scale;
 	}
@@ -188,7 +188,7 @@ class PinFixer {
 	 */
 	static scaleNotes(scale) {
 		const scaled = this.noteScaleConfigured(scale);
-		canvas.notes.objects.children.forEach(note => 
+		canvas.notes.objects?.children.forEach(note => 
 			this.scaleNote(note, scaled)
 		);
 	}
@@ -201,7 +201,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static hideNotes(scale, unhide) {
-		canvas.notes.objects.children.forEach(note =>
+		canvas.notes.objects?.children.forEach(note =>
 			this.hideNote(note, scale, unhide)
 		);
 	}
@@ -225,7 +225,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static showNoteNames() {
-		canvas.notes.objects.children.forEach(note =>
+		canvas.notes.objects?.children.forEach(note =>
 			this.showNoteName(note)
 		);
 	}
@@ -255,7 +255,7 @@ class PinFixer {
 	 * @memberof PinFixer
 	 */
 	static shouldShowName(note) {
-		const flags = note.data.flags?.pinfix;
+		const flags = note.document.flags?.pinfix;
 		return (this.enabled && flags?.showName) || note._hover;
 	}
 	
