@@ -1,5 +1,5 @@
 {
-	"name": "pin-fixer",
+	"id": "pin-fixer",
 	"title": "Pin Fixer",
 	"description": "Modifies the behaviour of map pins so that they do not become too small to see when the map is zoomed out, or so large that they cover everything when zoomed in.",
 	"author": "zeel",
@@ -11,9 +11,11 @@
 			"discord": "zeel#4200"
 		}
 	],
-	"version": "1.2.1",
-	"minimumCoreVersion": "9",
-	"compatibleCoreVersion": "9",
+	"version": "1.2.2",
+	"compatibility": {
+		"minimum": 10,
+		"verified": 10
+	},
 	"styles": [
 		"pin-fixer.css"
 	],
